@@ -25,7 +25,12 @@ function initialise()
 	walls[1] = { a: $V([300, 200, 0]), b: $V([500, 250, 0]) };
 	walls[2] = { a: $V([300, 300, 0]), b: $V([500, 350, 0]) };
 
-	emitter = $L($V([40, 400, 0]), $V([3, -5]));
+	walls[3] = { a: $V([300, 3, 0]), b: $V([800, 3, 0]) };
+	walls[4] = { a: $V([1021, 200, 0]), b: $V([1021, 500, 0]) };
+	walls[5] = { a: $V([800, 765, 0]), b: $V([300, 765, 0]) };
+	walls[6] = { a: $V([3, 500, 0]), b: $V([3, 200, 0]) };
+
+	emitter = $L($V([200, 400, 0]), $V([3, -5]));
 
 	element = $('#canvas');
   context = element[0].getContext('2d');
@@ -70,22 +75,31 @@ function update()
 
  	var finished = false;
  	var count = 0;
+	
+	var lastWall = null;
  	while (!finished)
  	{
 	 	var closest = null;
-	 	var closestWall = null;
-
+		var closestWall = null;
+		
 	 	for (var i = 0; i < walls.length; i++)
 	 	{
 	 		var wall = walls[i];
 	 		var intersection = beam.intersectionWith($L(wall.a, wall.b.subtract(wall.a)));
 
-			if (closest == null || intersection.distanceFrom(beam.anchor) < closest.distanceFrom(beam.anchor))
+			if (intersection != null && (closest == null || intersection.distanceFrom(beam.anchor) < closest.distanceFrom(beam.anchor)))
 			{
 				var halfway = wall.a.add(wall.b).multiply(0.5);
 				var dist = intersection.distanceFrom(halfway);
-				var maxDist = wall.a.distanceFrom(halfway)
-				if (dist < maxDist && (closest == null || closest.distanceFrom(beam.anchor) > 0.000001))
+				var maxDist = wall.a.distanceFrom(halfway);
+				
+				// If the dot product is negative, this is going backwards
+				var direction = beam.direction.dot(intersection.subtract(beam.anchor));
+				
+				// A) Must be colliding with a part of the line segment (dist < maxDist as long as intersection is in the line segment)
+				// B) Don't bounce off the wall we are already one (lastWall != wall)
+				// C) Don't bounce 'backwards' (direction > 0 if the intersection is in the direction of the beam)
+				if (dist < maxDist && lastWall != wall && direction > 0)
 				{
 					closest = intersection;
 					closestWall = wall;
@@ -93,13 +107,17 @@ function update()
 			}
 		}
 		count++;
-		finished = (closest == null) || count > 4;
+		finished = (closest == null) || count > 15;
 	 	if (!finished)
 	 	{
 	 		context.moveTo(beam.anchor.e(1), beam.anchor.e(2));
 			context.lineTo(closest.e(1), closest.e(2));
-			var dirVec = closestWall.b.subtract(wall.a);
-			beam = beam.reflectionIn($L(closestWall.a, $V([dirVec.e(2), -dirVec.e(1)])));
+			var dirVec = closestWall.b.subtract(closestWall.a);
+			var normal = $V([dirVec.e(2), -dirVec.e(1), 0]).toUnitVector();
+			var projectionOnNormal = normal.multiply(beam.direction.dot(normal));
+			var reflected = projectionOnNormal.multiply(-2).add(beam.direction);
+			beam = $L(closest, reflected);
+			lastWall = closestWall;
 		}
 	}
 
