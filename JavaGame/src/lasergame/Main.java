@@ -1,13 +1,10 @@
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
+package lasergame;
 import org.newdawn.slick.*;
 public class Main extends BasicGame
 {
 	static int windowX = 800;
 	static int windowY = 600;
- 
+	static Level1 level1 = new Level1();
   public Main()
   {
      super("Hello World");
@@ -28,17 +25,13 @@ public class Main extends BasicGame
   @Override
   public void render(GameContainer gc, Graphics g) throws SlickException
   {
-     g.drawString("Hello World", 100, 100);
-     
-     Image img = new Image("res/kitten.png");
-     
-     img.draw(Mouse.getX(), windowY - Mouse.getY());
+     level1.render(gc, g);
   }
  
   public static void main(String[] args) throws SlickException
   {
      AppGameContainer app = new AppGameContainer(new Main());
- 
+     app.setTargetFrameRate(60);
      app.setDisplayMode(windowX, windowY, false);
      app.start();
   }
