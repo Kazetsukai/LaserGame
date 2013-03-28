@@ -1,0 +1,4 @@
+package lasergame;
+
+public interface IEmitter extends IRenderable{
+}
