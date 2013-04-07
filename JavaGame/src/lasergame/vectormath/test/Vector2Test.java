@@ -13,10 +13,10 @@ public class Vector2Test {
 		Vector2 vecA = new Vector2(1.0, 2.5);
 		Vector2 vecB = new Vector2(2.0, 5.1);
 		
-		vecA.add(vecB);
+		Vector2 result = vecA.add(vecB);
 
-		assertEquals(3.0, vecA.x, Constants.EPSILON);
-		assertEquals(7.6, vecA.y, Constants.EPSILON);
+		assertEquals(3.0, result.x, Constants.EPSILON);
+		assertEquals(7.6, result.y, Constants.EPSILON);
 	}
 	
 	@Test
@@ -24,10 +24,10 @@ public class Vector2Test {
 		Vector2 vecA = new Vector2(1.0, 2.5);
 		Vector2 vecB = new Vector2(2.0, 5.1);
 		
-		vecA.subtract(vecB);
+		Vector2 result = vecA.subtract(vecB);
 		
-		assertEquals(-1.0, vecA.x, Constants.EPSILON);
-		assertEquals(-2.6, vecA.y, Constants.EPSILON);
+		assertEquals(-1.0, result.x, Constants.EPSILON);
+		assertEquals(-2.6, result.y, Constants.EPSILON);
 	}
 	
 	@Test
@@ -35,13 +35,13 @@ public class Vector2Test {
 		Vector2 vecA = new Vector2(1.0, 2.5);
 		Vector2 vecB = new Vector2(-2.0, 5.1);
 		
-		vecA.multiply(2.5);
-		vecB.multiply(-1.2);
+		Vector2 result = vecA.multiply(2.5);
+		Vector2 result2 = vecB.multiply(-1.2);
 
-		assertEquals(2.5, vecA.x, Constants.EPSILON);
-		assertEquals(6.25, vecA.y, Constants.EPSILON);
-		assertEquals(2.4, vecB.x, Constants.EPSILON);
-		assertEquals(-6.12, vecB.y, Constants.EPSILON);
+		assertEquals(2.5, result.x, Constants.EPSILON);
+		assertEquals(6.25, result.y, Constants.EPSILON);
+		assertEquals(2.4, result2.x, Constants.EPSILON);
+		assertEquals(-6.12, result2.y, Constants.EPSILON);
 	}
 
 	@Test
@@ -122,70 +122,70 @@ public class Vector2Test {
 	public void testNormaliseVectorXOnly() {
 		Vector2 vecA = new Vector2(3.0, 0.0);
 		
-		vecA.normalise();
+		Vector2 result = vecA.normalise();
 
-		assertEquals(1.0, vecA.x, Constants.EPSILON);
-		assertEquals(0.0, vecA.y, Constants.EPSILON);
+		assertEquals(1.0, result.x, Constants.EPSILON);
+		assertEquals(0.0, result.y, Constants.EPSILON);
 	}
 	
 	@Test
 	public void testNormaliseVectorYOnly() {
 		Vector2 vecA = new Vector2(0.0, 0.004);
 		
-		vecA.normalise();
+		Vector2 result = vecA.normalise();
 
-		assertEquals(0.0, vecA.x, Constants.EPSILON);
-		assertEquals(1.0, vecA.y, Constants.EPSILON);
+		assertEquals(0.0, result.x, Constants.EPSILON);
+		assertEquals(1.0, result.y, Constants.EPSILON);
 	}
 
 	@Test
 	public void testNormaliseVectorWithNegativeX() {
 		Vector2 vecA = new Vector2(-45.2, 0.0);
 		
-		vecA.normalise();
+		Vector2 result = vecA.normalise();
 
-		assertEquals(-1.0, vecA.x, Constants.EPSILON);
-		assertEquals(0.0, vecA.y, Constants.EPSILON);
+		assertEquals(-1.0, result.x, Constants.EPSILON);
+		assertEquals(0.0, result.y, Constants.EPSILON);
 	}
 	
 	@Test
 	public void testNormaliseVectorWithNegativeY() {
 		Vector2 vecA = new Vector2(0.0, -30.0);
 		
-		vecA.normalise();
+		Vector2 result = vecA.normalise();
 
-		assertEquals(0.0, vecA.x, Constants.EPSILON);
-		assertEquals(-1.0, vecA.y, Constants.EPSILON);
+		assertEquals(0.0, result.x, Constants.EPSILON);
+		assertEquals(-1.0, result.y, Constants.EPSILON);
 	}
 
 	@Test
 	public void testNormaliseVectorBig() {
 		Vector2 vecA = new Vector2(100000000.0, 100000000.0);
 		
-		vecA.normalise();
+		Vector2 result = vecA.normalise();
 
-		assertEquals(Constants.ONE_OVER_SQRT_TWO, vecA.x, Constants.EPSILON);
-		assertEquals(Constants.ONE_OVER_SQRT_TWO, vecA.y, Constants.EPSILON);
+		assertEquals(Constants.ONE_OVER_SQRT_TWO, result.x, Constants.EPSILON);
+		assertEquals(Constants.ONE_OVER_SQRT_TWO, result.y, Constants.EPSILON);
 	}
 	
 	@Test
 	public void testNormaliseVectorSmall() {
 		Vector2 vecA = new Vector2(0.000001, 0.000001);
 		
-		vecA.normalise();
+		Vector2 result = vecA.normalise();
 
-		assertEquals(Constants.ONE_OVER_SQRT_TWO, vecA.x, Constants.EPSILON);
-		assertEquals(Constants.ONE_OVER_SQRT_TWO, vecA.y, Constants.EPSILON);
+		assertEquals(Constants.ONE_OVER_SQRT_TWO, result.x, Constants.EPSILON);
+		assertEquals(Constants.ONE_OVER_SQRT_TWO, result.y, Constants.EPSILON);
 	}
 
 	@Test
 	public void testNormaliseZeroLengthVectorReturnsZeroLengthVector() {
 		Vector2 vecA = new Vector2(0.0, 0.0);
 		
-		vecA.normalise();
+		Vector2 result = vecA.normalise();
 		
-		assertEquals(0.0, vecA.x, Constants.EPSILON);
-		assertEquals(0.0, vecA.y, Constants.EPSILON);
+		assertEquals(0.0, result.x, Constants.EPSILON);
+		assertEquals(0.0, result.y, Constants.EPSILON);
 	}
 
 	@Test
@@ -255,5 +255,29 @@ public class Vector2Test {
 		double angle = vecA.angleWith(vecB);
 		
 		assertEquals(Math.PI, angle, Constants.EPSILON);
+	}
+	
+	@Test
+	public void testOperationsDontMutate() {
+		Vector2 vecA = new Vector2(3.0, 7.5);
+		Vector2 vecB = new Vector2(-3.3, -5.5);
+
+		vecA.add(vecB);
+		_checkNotMutated(vecA, vecB);
+		vecA.subtract(vecB);
+		_checkNotMutated(vecA, vecB);
+		vecA.multiply(4);
+		_checkNotMutated(vecA, vecB);
+		vecA.normalise();
+		_checkNotMutated(vecA, vecB);
+		vecA.dot(vecB);
+		_checkNotMutated(vecA, vecB);
+	}
+
+	private void _checkNotMutated(Vector2 vecA, Vector2 vecB) {
+		assertEquals(3.0, vecA.x, Constants.EPSILON);
+		assertEquals(7.5, vecA.y, Constants.EPSILON);
+		assertEquals(-3.3, vecB.x, Constants.EPSILON);
+		assertEquals(-5.5, vecB.y, Constants.EPSILON);
 	}
 }

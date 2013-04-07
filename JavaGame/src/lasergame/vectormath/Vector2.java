@@ -11,22 +11,19 @@ public class Vector2 {
 		this.y = y;
 	}
 
-	public void add(Vector2 rhs) {
-		x += rhs.x;
-		y += rhs.y;
+	public Vector2 add(Vector2 rhs) {
+		return new Vector2(x + rhs.x, y + rhs.y);
 	}
 	
-	public void subtract(Vector2 rhs) {
-		x -= rhs.x;
-		y -= rhs.y;
+	public Vector2 subtract(Vector2 rhs) {
+		return new Vector2(x - rhs.x, y - rhs.y);
 	}
 	
-	public void multiply(double rhs) {
-		x *= rhs;
-		y *= rhs;
+	public Vector2 multiply(double rhs) {
+		return new Vector2(x * rhs, y * rhs);
 	}
 	
-	public void normalise() {
+	public Vector2 normalise() {
 		double length = length();
 		
 		if (length == 0.0) {
@@ -34,8 +31,7 @@ public class Vector2 {
 			length = 1.0;
 		}
 		
-		x /= length;
-		y /= length;
+		return new Vector2(x / length, y / length);
 	}
 	
 	public double length() {
