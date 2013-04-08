@@ -1,0 +1,21 @@
+Fire the laser:
+
+* Get line between point and mouse
+  - Create line segment from two points
+
+* Represent location and speed as a line segment
+  - Set line segment length
+
+* Display laser as set length
+  - Set line segment length
+
+* Move line by speed every second
+  - Get vector from line segment (and multiply by time passed)
+  - Move line segment by vector
+
+* Reflect point and velocity if laser crossed a line in a frame
+  - Calculate if line segment collides with line segment
+  - Sort by distances to collisions
+  - (if so) Move to collision, remove appropriate amount of simulation time, continue simulation
+
+* Reflect visible portions of laser in the same way
