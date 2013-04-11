@@ -1,4 +1,4 @@
 package lasergame;
 
-public interface IEmitter extends IRenderable{
+public interface IEmitter extends ILevelEntity{
 }

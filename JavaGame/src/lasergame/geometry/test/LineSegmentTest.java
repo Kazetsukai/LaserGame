@@ -50,4 +50,56 @@ public class LineSegmentTest {
 		assertEquals(3.0, end.x, Constants.EPSILON);
 		assertEquals(7.6, end.y, Constants.EPSILON);
 	}
+
+	@Test
+	public void testIntersectLineSegments() {
+		final LineSegment segA = LineSegment.fromPoints(new Vector2(2, 3), new Vector2(3, 4));
+		final LineSegment segB = LineSegment.fromPoints(new Vector2(3, 3), new Vector2(2, 4));
+		
+		final Vector2 intersection = segA.getIntersection(segB);
+
+		assertEquals(2.5, intersection.x, Constants.EPSILON);
+		assertEquals(3.5, intersection.y, Constants.EPSILON);
+	}
+
+	@Test
+	public void testIntersectLineSegmentsAtTheTip() {
+		final LineSegment segA = LineSegment.fromPoints(new Vector2(0, 3), new Vector2(0, 4));
+		final LineSegment segB = LineSegment.fromPoints(new Vector2(3, 3), new Vector2(-3, 5));
+		
+		final Vector2 intersection = segA.getIntersection(segB);
+
+		assertEquals(0.0, intersection.x, Constants.EPSILON);
+		assertEquals(4.0, intersection.y, Constants.EPSILON);
+	}
+	
+	@Test
+	public void testNonIntersectingLineSegmentsJustPastTheTip() {
+		final LineSegment segA = LineSegment.fromPoints(new Vector2(0, 3), new Vector2(0, 4));
+		final LineSegment segB = LineSegment.fromPoints(new Vector2(3, 3), new Vector2(-3, 5.0001));
+		
+		final Vector2 intersection = segA.getIntersection(segB);
+
+		assertNull(intersection);
+	}
+
+	@Test
+	public void testNonIntersectingLineSegments() {
+		final LineSegment segA = LineSegment.fromPoints(new Vector2(2, 3), new Vector2(3, 4));
+		final LineSegment segB = LineSegment.fromPoints(new Vector2(3, 3), new Vector2(3.5, 4));
+		
+		final Vector2 intersection = segA.getIntersection(segB);
+
+		assertNull(intersection);
+	}
+	
+	@Test
+	public void testNonIntersectingLineSegmentsParallel() {
+		final LineSegment segA = LineSegment.fromPoints(new Vector2(2, 3), new Vector2(3, 4));
+		final LineSegment segB = LineSegment.fromPoints(new Vector2(3, 3), new Vector2(4, 4));
+		
+		final Vector2 intersection = segA.getIntersection(segB);
+
+		assertNull(intersection);
+	}
 }

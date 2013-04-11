@@ -1,0 +1,8 @@
+* Create new Java Project
+* Untick "Use Default Location"
+* Use folder "LaserGame"
+* In the project -> Properties -> Java Build Path -> Libraries click Add Library...
+* Add JUnit, version 4
+* In Libraries, expand lwjgl.jar and edit the native library location
+* ???
+* Profit

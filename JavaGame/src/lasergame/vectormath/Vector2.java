@@ -50,12 +50,19 @@ public final class Vector2 {
 	public final double length() {
 		return Math.sqrt(dot(this));
 	}
-	
+
 	/***
 	 * @return the dot product of this vector with another
 	 */
 	public final double dot(final Vector2 rhs) {
 		return (this.x * rhs.x + this.y * rhs.y);
+	}
+	
+	/***
+	 * @return the magnitude of the 3d cross product of this vector with another
+	 */
+	public final double crossMagnitude(final Vector2 rhs) {
+		return (this.x * rhs.y - this.y * rhs.x);
 	}
 
 	/***

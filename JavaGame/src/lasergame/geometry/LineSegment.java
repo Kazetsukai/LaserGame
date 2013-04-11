@@ -46,4 +46,26 @@ public class LineSegment {
 	public Vector2 getEndPoint() {
 		return mStartPoint.add(mDisplacement);
 	}
+	
+	public LineSegment scale(double scale){
+		return new LineSegment(this.mStartPoint, this.mDisplacement.multiply(scale));
+	}
+
+	public Vector2 getIntersection(LineSegment rhs) {
+		
+		double cross = this.mDisplacement.crossMagnitude(rhs.mDisplacement);
+		
+		if (cross == 0) 
+			return null; // The lines are parallel
+		
+		Vector2 startPointDiff = rhs.mStartPoint.subtract(this.mStartPoint);
+		
+		double t = startPointDiff.crossMagnitude(rhs.mDisplacement) / cross;
+		double u = startPointDiff.crossMagnitude(this.mDisplacement) / cross;
+		
+		if (t < 0 || t > 1 || u < 0 || u > 1) 
+			return null; // the infinite lines are colliding, but not within the line segments 
+		
+		return this.mStartPoint.add(this.mDisplacement.multiply(t));
+	}
 }
