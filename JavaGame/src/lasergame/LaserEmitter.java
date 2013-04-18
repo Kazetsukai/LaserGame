@@ -34,11 +34,18 @@ public class LaserEmitter implements IEmitter {
 			Intersection.sortIntersections(intersections);
 			Intersection i = intersections.get(0);
 			Vector2 point = i.point;
+			Vector2 normal = i.point.add(i.normal.multiply(30));
 			
 			g.draw(new Circle((float)point.x,(float)point.y, 10));	
 			g.drawString(((Long)Math.round(i.distance)).toString(), (float)point.x, (float)point.y);
-		
+
+			g.drawLine((float)i.point.x,(float)i.point.y,(float)normal.x, (float)normal.y);
 			g.drawLine((float)lazer.getStartPoint().x,(float)lazer.getStartPoint().y,(float)point.x, (float)point.y);
+			
+			Vector2 surface = i.normal.normalRight();
+			Vector2 reflectPoint = i.point.subtract(lazer.getStartPoint()).projectOnto(surface).multiply(2).add(lazer.getStartPoint());
+			
+			g.drawLine((float)point.x,(float)point.y,(float)reflectPoint.x, (float)reflectPoint.y);
 		}
 		else{
 			g.drawLine((float)lazer.getStartPoint().x,(float)lazer.getStartPoint().y,(float)lazer.getEndPoint().x,(float)lazer.getEndPoint().y);

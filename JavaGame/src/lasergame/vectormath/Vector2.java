@@ -101,4 +101,12 @@ public final class Vector2 {
 		Vector2 unit = rhs.normalise();
 		return unit.multiply(this.dot(unit));
 	}
+	
+	public final Vector2 normalRight() {
+		return new Vector2(-y, x).normalise();
+	}
+	
+	public final Vector2 normalLeft() {
+		return new Vector2(y, -x).normalise();
+	}
 }
