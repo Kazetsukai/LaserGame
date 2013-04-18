@@ -273,6 +273,31 @@ public class Vector2Test {
 		vecA.dot(vecB);
 		_checkNotMutated(vecA, vecB);
 	}
+	
+	@Test
+	public void testProjectionParallel() {
+		final Vector2 vecA = new Vector2(1.0, 1.0);
+		final Vector2 vecB = new Vector2(5.5, 5.5);
+		
+		Vector2 resultA = vecA.projectOnto(vecB);
+		Vector2 resultB = vecB.projectOnto(vecA);
+		
+		assertEquals(resultA.x, vecA.x, Constants.EPSILON);
+		assertEquals(resultA.y, vecA.y, Constants.EPSILON);
+		assertEquals(resultB.x, vecB.x, Constants.EPSILON);
+		assertEquals(resultB.y, vecB.y, Constants.EPSILON);
+	}
+	
+	@Test
+	public void testProjectionNotSoParallel() {
+		final Vector2 vecA = new Vector2(3.0, 4.0);
+		final Vector2 vecB = new Vector2(0.0, 1.0);
+		
+		Vector2 resultA = vecA.projectOnto(vecB);
+		
+		assertEquals(0.0, resultA.x, Constants.EPSILON);
+		assertEquals(4.0, resultA.y, Constants.EPSILON);
+	}
 
 	private void _checkNotMutated(final Vector2 vecA, final Vector2 vecB) {
 		assertEquals(3.0, vecA.x, Constants.EPSILON);

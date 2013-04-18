@@ -1,5 +1,8 @@
 package lasergame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lasergame.geometry.LineSegment;
 
 import org.newdawn.slick.GameContainer;
@@ -21,8 +24,8 @@ public class Target implements ILevelEntity {
 	}
 
 	@Override
-	public Intersection getIntersectionWith(LineSegment line) {
+	public List<Intersection> getIntersectionsWith(LineSegment line) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Intersection>();
 	}
 }

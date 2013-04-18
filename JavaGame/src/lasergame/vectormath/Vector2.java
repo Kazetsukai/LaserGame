@@ -96,4 +96,9 @@ public final class Vector2 {
 				this.x <= rhs.x + Constants.EPSILON &&
 				this.y <= rhs.y + Constants.EPSILON);
 	}
+	
+	public final Vector2 projectOnto(Vector2 rhs) {
+		Vector2 unit = rhs.normalise();
+		return unit.multiply(this.dot(unit));
+	}
 }

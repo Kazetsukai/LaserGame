@@ -1,5 +1,8 @@
 package lasergame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lasergame.geometry.LineSegment;
 import lasergame.vectormath.Vector2;
 
@@ -26,15 +29,28 @@ public class Wall implements ILevelEntity {
 	}
 
 	@Override
-	public Intersection getIntersectionWith(LineSegment line) {
+	public List<Intersection> getIntersectionsWith(LineSegment line) {
 		
-		Vector2 v = line.getIntersection(LineSegment.fromPoints(new Vector2(mX,mY), new Vector2(mX + mWidth,mY)));
+		ArrayList<Intersection> intersections = new ArrayList<Intersection>();
 		
-		
-		if(v != null) {
-			return new Intersection(v, v.subtract(line.getStartPoint()).length(), this);
+		Vector2 vTop = line.getIntersection(LineSegment.fromPoints(new Vector2(mX,mY), new Vector2(mX + mWidth, mY)));
+		Vector2 vBottom = line.getIntersection(LineSegment.fromPoints(new Vector2(mX,mY + mHeight), new Vector2(mX + mWidth, mY + mHeight)));
+		Vector2 vLeft = line.getIntersection(LineSegment.fromPoints(new Vector2(mX,mY), new Vector2(mX, mY + mHeight)));
+		Vector2 vRight = line.getIntersection(LineSegment.fromPoints(new Vector2(mX + mWidth,mY), new Vector2(mX + mWidth, mY + mHeight)));
+
+		if(vTop != null) {
+			intersections.add(new Intersection(vTop, vTop.subtract(line.getStartPoint()).length(), this));
+		}
+		if(vBottom != null) {
+			intersections.add(new Intersection(vBottom, vBottom.subtract(line.getStartPoint()).length(), this));
+		}
+		if(vLeft != null) {
+			intersections.add(new Intersection(vLeft, vLeft.subtract(line.getStartPoint()).length(), this));
+		}
+		if(vRight != null) {
+			intersections.add(new Intersection(vRight, vRight.subtract(line.getStartPoint()).length(), this));
 		}
 		
-		return null;
+		return intersections;
 	}
 }

@@ -29,9 +29,10 @@ public class Level1 implements ILevel {
 	public List<Intersection> getIntersectionsWith(LineSegment ls){
 		List<Intersection> intersections = new ArrayList<Intersection>();
 		for (ILevelEntity e : mLevelEntities){
-			Intersection i = e.getIntersectionWith(ls);
-			if(i != null)
-				intersections.add(i);
+			for (Intersection i : e.getIntersectionsWith(ls)) {
+				if(i != null)
+					intersections.add(i);
+			}
 		}
 		return intersections;
 	}
