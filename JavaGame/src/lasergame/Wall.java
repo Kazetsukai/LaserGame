@@ -11,32 +11,49 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.*;
 
 public class Wall implements ILevelEntity {
-	private int mX;
-	private int mY;
-	private int mHeight;
-	private int mWidth;
+	private LineSegment mLine;
+	private double mWidth;
 	
-	public Wall(int x, int y, int width, int height){
-		mX = x;
-		mY = y;
-		mHeight = height;
+	public Wall(LineSegment line, double width){
+		mLine = line;
 		mWidth = width;
 	}
 
 	@Override
 	public void render(GameContainer gc, Graphics g) {
-		g.draw(new Rectangle(mX,mY,mWidth,mHeight));
+		Vector2 normal = mLine.getDisplacement().normalLeft().multiply(mWidth);
+		Vector2 start = mLine.getStartPoint();
+		Vector2 end = mLine.getEndPoint();
+		
+		Vector2 topLeft = start.add(normal);
+		Vector2 bottomLeft = start.subtract(normal);
+		Vector2 topRight = end.add(normal);
+		Vector2 bottomRight = end.subtract(normal);
+
+		g.draw(getLine(topLeft, topRight));
+		g.draw(getLine(topRight, bottomRight));
+		g.draw(getLine(bottomRight, bottomLeft));
+		g.draw(getLine(bottomLeft, topLeft));
+	}
+
+	private Line getLine(Vector2 start, Vector2 end) {
+		return new Line((float)start.x, (float)start.y, (float)end.x, (float)end.y);
 	}
 
 	@Override
 	public List<Intersection> getIntersectionsWith(LineSegment line) {
 		
 		ArrayList<Intersection> intersections = new ArrayList<Intersection>();
+
+		Vector2 normal = mLine.getDisplacement().normalLeft().multiply(mWidth);
+		Vector2 start = mLine.getStartPoint();
+		Vector2 end = mLine.getEndPoint();
+		Vector2 length = mLine.getDisplacement();
 		
-		LineSegment top = LineSegment.fromPoints(new Vector2(mX,mY), new Vector2(mX + mWidth, mY));
-		LineSegment bottom = LineSegment.fromPoints(new Vector2(mX,mY + mHeight), new Vector2(mX + mWidth, mY + mHeight));
-		LineSegment left = LineSegment.fromPoints(new Vector2(mX,mY), new Vector2(mX, mY + mHeight));
-		LineSegment right = LineSegment.fromPoints(new Vector2(mX + mWidth,mY), new Vector2(mX + mWidth, mY + mHeight));
+		LineSegment top = new LineSegment(start.add(normal), length);
+		LineSegment bottom = new LineSegment(start.subtract(normal), length);
+		LineSegment left = new LineSegment(start.add(normal), normal.multiply(-2));
+		LineSegment right = new LineSegment(end.add(normal), normal.multiply(-2));
 		
 		Vector2 vTop = line.getIntersection(top);
 		Vector2 vBottom = line.getIntersection(bottom);

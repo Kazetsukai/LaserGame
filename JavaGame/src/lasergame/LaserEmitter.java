@@ -28,28 +28,31 @@ public class LaserEmitter implements IEmitter {
 		LineSegment lazer = LineSegment.fromPoints(new Vector2(mX,mY),  new Vector2(input.getMouseX(), input.getMouseY()));
 		lazer = lazer.scale(1000);
 		
-		List<Intersection> intersections = mLevel.getIntersectionsWith(lazer);
+		for (int j = 0; j < 10; j++) {
+			List<Intersection> intersections = mLevel.getIntersectionsWith(lazer);
+			
+			if(intersections.size() > 0) {
+				Intersection.sortIntersections(intersections);
+				Intersection intersection = intersections.get(0);
+				Vector2 point = intersection.point;
+				Vector2 normalDraw = intersection.point.add(intersection.normal.multiply(30));
+				
+				g.draw(new Circle((float)point.x,(float)point.y, 10));	
+				g.drawString(((Long)Math.round(intersection.distance)).toString(), (float)point.x, (float)point.y);
+	
+				g.drawLine((float)intersection.point.x,(float)intersection.point.y,(float)normalDraw.x, (float)normalDraw.y);
+				g.drawLine((float)lazer.getStartPoint().x,(float)lazer.getStartPoint().y,(float)point.x, (float)point.y);
+				
+				Vector2 newDirection = lazer.getDisplacement().subtract(intersection.normal.multiply(intersection.normal.dot(lazer.getDisplacement()) * 2));
+				
+				lazer = new LineSegment(intersection.point, newDirection);
+			}
+			else{
+				g.drawLine((float)lazer.getStartPoint().x,(float)lazer.getStartPoint().y,(float)lazer.getEndPoint().x,(float)lazer.getEndPoint().y);
+				break;
+			}
+		}
 		
-		if(intersections.size() > 0) {
-			Intersection.sortIntersections(intersections);
-			Intersection i = intersections.get(0);
-			Vector2 point = i.point;
-			Vector2 normal = i.point.add(i.normal.multiply(30));
-			
-			g.draw(new Circle((float)point.x,(float)point.y, 10));	
-			g.drawString(((Long)Math.round(i.distance)).toString(), (float)point.x, (float)point.y);
-
-			g.drawLine((float)i.point.x,(float)i.point.y,(float)normal.x, (float)normal.y);
-			g.drawLine((float)lazer.getStartPoint().x,(float)lazer.getStartPoint().y,(float)point.x, (float)point.y);
-			
-			Vector2 surface = i.normal.normalRight();
-			Vector2 reflectPoint = i.point.subtract(lazer.getStartPoint()).projectOnto(surface).multiply(2).add(lazer.getStartPoint());
-			
-			g.drawLine((float)point.x,(float)point.y,(float)reflectPoint.x, (float)reflectPoint.y);
-		}
-		else{
-			g.drawLine((float)lazer.getStartPoint().x,(float)lazer.getStartPoint().y,(float)lazer.getEndPoint().x,(float)lazer.getEndPoint().y);
-		}
 		g.draw(new Circle(mX,mY, 10));
 	}
 

@@ -1,5 +1,6 @@
 package lasergame.geometry;
 
+import lasergame.Constants;
 import lasergame.vectormath.Vector2;
 
 public class LineSegment {
@@ -63,7 +64,7 @@ public class LineSegment {
 		double t = startPointDiff.crossMagnitude(rhs.mDisplacement) / cross;
 		double u = startPointDiff.crossMagnitude(this.mDisplacement) / cross;
 		
-		if (t < 0 || t > 1 || u < 0 || u > 1) 
+		if (t <= Constants.EPSILON || t > 1 || u < 0 || u > 1) 
 			return null; // the infinite lines are colliding, but not within the line segments 
 		
 		return this.mStartPoint.add(this.mDisplacement.multiply(t));
