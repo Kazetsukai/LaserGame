@@ -28,7 +28,7 @@ public class LaserEmitter implements IEmitter {
 		LineSegment lazer = LineSegment.fromPoints(new Vector2(mX,mY),  new Vector2(input.getMouseX(), input.getMouseY()));
 		lazer = lazer.scale(1000);
 		
-		for (int j = 0; j < 10; j++) {
+		for (int j = 0; j < 100; j++) {
 			List<Intersection> intersections = mLevel.getIntersectionsWith(lazer);
 			
 			if(intersections.size() > 0) {
