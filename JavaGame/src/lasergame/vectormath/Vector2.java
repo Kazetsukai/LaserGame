@@ -72,7 +72,7 @@ public final class Vector2 {
 		double lengthMult = (this.length() * rhs.length());
 		
 		if (lengthMult == 0.0) {
-			lengthMult = 1.0;
+			return 1.0; // Call the acos (and thus angle) 0 when one vector is a zero vector.
 		}
 		final double cosAngle = dot(rhs) / lengthMult;
 		

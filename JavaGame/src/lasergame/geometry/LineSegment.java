@@ -69,4 +69,16 @@ public class LineSegment {
 		
 		return this.mStartPoint.add(this.mDisplacement.multiply(t));
 	}
+	
+	private double leftnessOfPoint(Vector2 rhs) {
+		return rhs.subtract(mStartPoint).crossMagnitude(mDisplacement);
+	}
+	
+	public boolean isPointOnLeft(Vector2 rhs) {
+		return leftnessOfPoint(rhs) > 0;
+	}
+	
+	public boolean isPointOnRight(Vector2 rhs) {
+		return leftnessOfPoint(rhs) < 0;
+	}
 }

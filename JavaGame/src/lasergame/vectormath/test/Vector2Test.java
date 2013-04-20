@@ -56,24 +56,36 @@ public class Vector2Test {
 	public void testVectorNotEqualsXSame() {
 		final Vector2 vecA = new Vector2(1.0, 2.5);
 		final Vector2 vecB = new Vector2(1.0, 5.1);
-		
+
 		assertFalse(vecA.equals(vecB));
+		assertFalse(vecB.equals(vecA));
 	}
 
 	@Test
 	public void testVectorNotEqualsYSame() {
 		final Vector2 vecA = new Vector2(1.0, 2.5);
 		final Vector2 vecB = new Vector2(-2.0, 2.5);
-		
+
 		assertFalse(vecA.equals(vecB));
+		assertFalse(vecB.equals(vecA));
 	}
 	
 	@Test
 	public void testVectorEquals() {
 		final Vector2 vecA = new Vector2(1.0, 2.5);
 		final Vector2 vecB = new Vector2(1.0, 2.5);
-		
+
 		assertTrue(vecA.equals(vecB));
+		assertTrue(vecB.equals(vecA));
+	}
+	
+	@Test
+	public void testVectorNotEqualsNull() {
+		final Vector2 vecA = new Vector2(1.21, 23.52);
+		final Vector2 vecB = new Vector2(0, 0);
+
+		assertFalse(vecA.equals(null));
+		assertFalse(vecB.equals(null));
 	}
 
 	@Test
@@ -226,11 +238,21 @@ public class Vector2Test {
 		
 		assertEquals(-65.25, dot, Constants.EPSILON);
 	}
-	
+
 	@Test
-	public void testAngleWithSelf() {
+	public void testAngleWithSelfIsZero() {
 		final Vector2 vecA = new Vector2(3.0, 7.5);
 		final Vector2 vecB = new Vector2(3.0, 7.5);
+		
+		double angle = vecA.angleWith(vecB);
+		
+		assertEquals(0.0, angle, Constants.EPSILON);
+	}
+	
+	@Test
+	public void testAngleWithZeroVectorIsZero() {
+		final Vector2 vecA = new Vector2(3.0, 7.5);
+		final Vector2 vecB = new Vector2(0.0, 0.0);
 		
 		double angle = vecA.angleWith(vecB);
 		
@@ -275,7 +297,7 @@ public class Vector2Test {
 	}
 	
 	@Test
-	public void testProjectionParallel() {
+	public void testProjectionEqualsOriginalVectorWhenParallel() {
 		final Vector2 vecA = new Vector2(1.0, 1.0);
 		final Vector2 vecB = new Vector2(5.5, 5.5);
 		
@@ -289,7 +311,7 @@ public class Vector2Test {
 	}
 	
 	@Test
-	public void testProjectionNotSoParallel() {
+	public void testProjectionOntoAxisAlignedVectorEqualsComponentInThatAxis() {
 		final Vector2 vecA = new Vector2(3.0, 4.0);
 		final Vector2 vecB = new Vector2(0.0, 1.0);
 		
@@ -304,5 +326,53 @@ public class Vector2Test {
 		assertEquals(7.5, vecA.y, Constants.EPSILON);
 		assertEquals(-3.3, vecB.x, Constants.EPSILON);
 		assertEquals(-5.5, vecB.y, Constants.EPSILON);
+	}
+
+	@Test
+	public void testCrossMagnitudeIsZeroForParallelVectors() {
+		final Vector2 vecA = new Vector2(3.0, 4.0);
+		final Vector2 vecB = new Vector2(6.0, 8.0);
+		
+		double result = vecA.crossMagnitude(vecB);
+		
+		assertEquals(0.0, result, Constants.EPSILON);
+	}
+	
+	@Test
+	public void testCrossMagnitudeIsLengthSquaredForPerpendicularVectors() {
+		final Vector2 vecA = new Vector2(3.0, 4.0);
+		final Vector2 vecB = new Vector2(6.0, 8.0);
+		
+		double result = vecA.crossMagnitude(vecB);
+		
+		assertEquals(0.0, result, Constants.EPSILON);
+	}
+
+	@Test
+	public void testNormalLeftInYGoesDownWorld() {
+		final Vector2 vecA = new Vector2(-6.0, 8.0);
+		final Vector2 vecB = new Vector2(1.0, 0.0);
+		
+		Vector2 resultA = vecA.normalLeft();
+		Vector2 resultB = vecB.normalLeft();
+
+		assertEquals(0.8, resultA.x, Constants.EPSILON);
+		assertEquals(0.6, resultA.y, Constants.EPSILON);
+		assertEquals(0.0, resultB.x, Constants.EPSILON);
+		assertEquals(-1.0, resultB.y, Constants.EPSILON);
+	}
+	
+	@Test
+	public void testNormalRightInYGoesDownWorld() {
+		final Vector2 vecA = new Vector2(-6.0, 8.0);
+		final Vector2 vecB = new Vector2(1.0, 0.0);
+		
+		Vector2 resultA = vecA.normalRight();
+		Vector2 resultB = vecB.normalRight();
+
+		assertEquals(-0.8, resultA.x, Constants.EPSILON);
+		assertEquals(-0.6, resultA.y, Constants.EPSILON);
+		assertEquals(0.0, resultB.x, Constants.EPSILON);
+		assertEquals(1.0, resultB.y, Constants.EPSILON);
 	}
 }
