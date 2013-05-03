@@ -22,6 +22,18 @@ public class LaserEmitter implements IEmitter {
 	}
 	
 	@Override
+	public void update(GameContainer gc, double timeElapsed) {
+		Input input = gc.getInput();
+		
+		Vector2 mouseLoc = new Vector2(input.getMouseX(), input.getMouseY());
+		Vector2 currentLoc = new Vector2(mX, mY);
+		
+		if (input.isMousePressed(input.MOUSE_LEFT_BUTTON)) {
+			mLevel.spawn(new LaserBeam(mLevel, currentLoc, mouseLoc.subtract(currentLoc).normalise().multiply(500)));
+		}
+	}
+	
+	@Override
 	public void render(GameContainer gc, Graphics g) {
 		Input input = gc.getInput();
 			

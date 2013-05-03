@@ -20,6 +20,11 @@ public class Wall implements ILevelEntity {
 	}
 
 	@Override
+	public void update(GameContainer gc, double timeElapsed) {
+		
+	}
+	
+	@Override
 	public void render(GameContainer gc, Graphics g) {
 		Vector2 normal = mLine.getDisplacement().normalLeft().multiply(mWidth);
 		Vector2 start = mLine.getStartPoint();

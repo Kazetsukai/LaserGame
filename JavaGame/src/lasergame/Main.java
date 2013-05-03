@@ -19,7 +19,11 @@ public class Main extends BasicGame
   @Override
   public void update(GameContainer gc, int delta) throws SlickException
   {
- 
+	  System.out.println(delta);
+	  
+	  double timeElapsed = delta / 1000.0;
+	  
+	  level1.update(gc, timeElapsed);
   }
  
   @Override
