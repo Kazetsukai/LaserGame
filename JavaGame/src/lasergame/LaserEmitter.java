@@ -37,30 +37,31 @@ public class LaserEmitter implements IEmitter {
 	public void render(GameContainer gc, Graphics g) {
 		Input input = gc.getInput();
 			
-		LineSegment lazer = LineSegment.fromPoints(new Vector2(mX,mY),  new Vector2(input.getMouseX(), input.getMouseY()));
-		lazer = lazer.scale(1000);
+		LineSegment laser = LineSegment.fromPoints(new Vector2(mX,mY),  new Vector2(input.getMouseX(), input.getMouseY()));
+		laser = laser.scale(1000);
 		
 		for (int j = 0; j < 100; j++) {
-			List<Intersection> intersections = mLevel.getIntersectionsWith(lazer);
+			List<Intersection> intersections = mLevel.getIntersectionsWith(laser);
 			
 			if(intersections.size() > 0) {
 				Intersection.sortIntersections(intersections);
 				Intersection intersection = intersections.get(0);
 				Vector2 point = intersection.point;
 				Vector2 normalDraw = intersection.point.add(intersection.normal.multiply(30));
+				Vector2 tangent = intersection.normal.normalLeft();
 				
 				g.draw(new Circle((float)point.x,(float)point.y, 10));	
 				g.drawString(((Long)Math.round(intersection.distance)).toString(), (float)point.x, (float)point.y);
 	
 				g.drawLine((float)intersection.point.x,(float)intersection.point.y,(float)normalDraw.x, (float)normalDraw.y);
-				g.drawLine((float)lazer.getStartPoint().x,(float)lazer.getStartPoint().y,(float)point.x, (float)point.y);
+				g.drawLine((float)laser.getStartPoint().x,(float)laser.getStartPoint().y,(float)point.x, (float)point.y);
+
+				Vector2 newDirection = laser.getDisplacement().reflectOver(tangent);
 				
-				Vector2 newDirection = lazer.getDisplacement().subtract(intersection.normal.multiply(intersection.normal.dot(lazer.getDisplacement()) * 2));
-				
-				lazer = new LineSegment(intersection.point, newDirection);
+				laser = new LineSegment(intersection.point, newDirection);
 			}
 			else{
-				g.drawLine((float)lazer.getStartPoint().x,(float)lazer.getStartPoint().y,(float)lazer.getEndPoint().x,(float)lazer.getEndPoint().y);
+				g.drawLine((float)laser.getStartPoint().x,(float)laser.getStartPoint().y,(float)laser.getEndPoint().x,(float)laser.getEndPoint().y);
 				break;
 			}
 		}

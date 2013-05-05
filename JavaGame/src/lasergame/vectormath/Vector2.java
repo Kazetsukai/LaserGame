@@ -109,4 +109,8 @@ public final class Vector2 {
 	public final Vector2 normalLeft() {
 		return new Vector2(y, -x).normalise();
 	}
+	
+	public final Vector2 reflectOver(Vector2 rhs) {
+		return this.add(this.projectOnto(rhs).subtract(this).multiply(2));
+	}
 }

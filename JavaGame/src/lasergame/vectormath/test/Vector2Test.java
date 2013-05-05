@@ -280,7 +280,7 @@ public class Vector2Test {
 	}
 	
 	@Test
-	public void testOperationsDontMutate() {
+	public void testAddSubNormDotOperationsDontMutate() {
 		final Vector2 vecA = new Vector2(3.0, 7.5);
 		final Vector2 vecB = new Vector2(-3.3, -5.5);
 
@@ -293,6 +293,34 @@ public class Vector2Test {
 		vecA.normalise();
 		_checkNotMutated(vecA, vecB);
 		vecA.dot(vecB);
+		_checkNotMutated(vecA, vecB);
+	}	
+
+	@Test
+	public void testProjectDoesntMutate() {
+		final Vector2 vecA = new Vector2(3.0, 7.5);
+		final Vector2 vecB = new Vector2(-3.3, -5.5);
+
+		vecA.projectOnto(vecB);
+		_checkNotMutated(vecA, vecB);
+	}
+
+	@Test
+	public void testNormalsDontMutate() {
+		final Vector2 vecA = new Vector2(3.0, 7.5);
+		final Vector2 vecB = new Vector2(-3.3, -5.5);
+
+		vecA.normalLeft();
+		vecB.normalRight();
+		_checkNotMutated(vecA, vecB);
+	}
+	
+	@Test
+	public void testReflectDoesntMutate() {
+		final Vector2 vecA = new Vector2(3.0, 7.5);
+		final Vector2 vecB = new Vector2(-3.3, -5.5);
+
+		vecA.reflectOver(vecB);
 		_checkNotMutated(vecA, vecB);
 	}
 	
@@ -374,5 +402,37 @@ public class Vector2Test {
 		assertEquals(-0.6, resultA.y, Constants.EPSILON);
 		assertEquals(0.0, resultB.x, Constants.EPSILON);
 		assertEquals(1.0, resultB.y, Constants.EPSILON);
+	}
+	
+	@Test 
+	public void testReflectOverSelfIsSame() {
+		final Vector2 vecA = new Vector2(-6.0, 8.0);
+		
+		Vector2 result = vecA.reflectOver(vecA);
+		
+		assertEquals(vecA.x, result.x, Constants.EPSILON);
+		assertEquals(vecA.y, result.y, Constants.EPSILON);
+	}
+	
+	@Test 
+	public void testReflectOverHorizontal() {
+		final Vector2 vecA = new Vector2(-6.0, 8.0);
+		final Vector2 vecB = new Vector2(450.0, 0.0);
+		
+		Vector2 result = vecA.reflectOver(vecB);
+		
+		assertEquals(-6.0, result.x, Constants.EPSILON);
+		assertEquals(-8.0, result.y, Constants.EPSILON);
+	}
+	
+	@Test 
+	public void testReflectOverRightAngle() {
+		final Vector2 vecA = new Vector2(-6.0, 3.0);
+		final Vector2 vecB = new Vector2(10.0, 20.0);
+		
+		Vector2 result = vecA.reflectOver(vecB);
+		
+		assertEquals(6.0, result.x, Constants.EPSILON);
+		assertEquals(-3.0, result.y, Constants.EPSILON);
 	}
 }

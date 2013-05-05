@@ -39,8 +39,9 @@ public class LaserBeam implements ILevelEntity {
 			Intersection.sortIntersections(intersections);
 			Intersection intersection = intersections.get(0);
 			Vector2 point = intersection.point;
+			Vector2 tangent = intersection.normal.normalLeft();
 			
-			Vector2 newDirection = laser.getDisplacement().subtract(intersection.normal.multiply(intersection.normal.dot(laser.getDisplacement()) * 2));
+			Vector2 newDirection = laser.getDisplacement().reflectOver(tangent);
 			
 			LineSegment reflectedBeam = new LineSegment(intersection.point, newDirection.normalise().multiply(500));
 			_level.spawn(new LaserBeam(_level, reflectedBeam.getStartPoint(), reflectedBeam.getDisplacement()));
