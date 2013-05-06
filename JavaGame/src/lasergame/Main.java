@@ -1,4 +1,7 @@
 package lasergame;
+import lasergame.levels.Level1;
+
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.*;
 public class Main extends BasicGame
 {
@@ -13,7 +16,12 @@ public class Main extends BasicGame
   @Override
   public void init(GameContainer gc) throws SlickException
   {
- 
+	  GL11.glMatrixMode(GL11.GL_PROJECTION);
+	  GL11.glLoadIdentity();
+	  GL11.glOrtho(0, 512, 0, 512, 1, -1);
+	  GL11.glMatrixMode(GL11.GL_MODELVIEW);
+	  
+	  GL11.glEnable(GL11.GL_TEXTURE_2D);
   }
  
   @Override
@@ -29,8 +37,15 @@ public class Main extends BasicGame
   @Override
   public void render(GameContainer gc, Graphics g) throws SlickException
   {
+	  clearGL();
      level1.render(gc, g);
   }
+  
+  public void clearGL(){
+	  GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+	  GL11.glLoadIdentity();
+  }
+
  
   public static void main(String[] args) throws SlickException
   {

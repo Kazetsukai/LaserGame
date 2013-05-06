@@ -1,8 +1,10 @@
-package lasergame;
+package lasergame.levelentities;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import lasergame.ILevelEntity;
+import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
 
 import org.newdawn.slick.GameContainer;

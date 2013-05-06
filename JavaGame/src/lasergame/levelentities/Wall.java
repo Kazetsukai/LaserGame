@@ -1,8 +1,10 @@
-package lasergame;
+package lasergame.levelentities;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import lasergame.ILevelEntity;
+import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
 import lasergame.vectormath.Vector2;
 
@@ -11,8 +13,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.*;
 
 public class Wall implements ILevelEntity {
-	private LineSegment mLine;
-	private double mWidth;
+	protected LineSegment mLine;
+	protected double mWidth;
 	
 	public Wall(LineSegment line, double width){
 		mLine = line;
@@ -41,7 +43,7 @@ public class Wall implements ILevelEntity {
 		g.draw(getLine(bottomLeft, topLeft));
 	}
 
-	private Line getLine(Vector2 start, Vector2 end) {
+	protected Line getLine(Vector2 start, Vector2 end) {
 		return new Line((float)start.x, (float)start.y, (float)end.x, (float)end.y);
 	}
 

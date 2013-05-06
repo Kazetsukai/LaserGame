@@ -1,15 +1,19 @@
-package lasergame;
+package lasergame.levels;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import lasergame.ILevel;
+import lasergame.ILevelEntity;
+import lasergame.Intersection;
+import lasergame.levelentities.*;
 import lasergame.geometry.LineSegment;
 import lasergame.vectormath.Vector2;
 
 import org.newdawn.slick.*;
 
-public class Level1 implements ILevel {
+public class LukesLevel implements ILevel {
 	private List<ILevelEntity> mLevelEntities = new ArrayList<ILevelEntity>(Arrays.asList(
 			(ILevelEntity)new Wall(new LineSegment(new Vector2(400, 300), new Vector2(0, 400)), 20),
 			(ILevelEntity)new Wall(new LineSegment(new Vector2(200, 10), new Vector2(400, 0)), 20),

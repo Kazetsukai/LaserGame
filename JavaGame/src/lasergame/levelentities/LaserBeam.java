@@ -1,8 +1,11 @@
-package lasergame;
+package lasergame.levelentities;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import lasergame.ILevel;
+import lasergame.ILevelEntity;
+import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
 import lasergame.vectormath.Vector2;
 
