@@ -63,7 +63,7 @@ public class LaserEmitter implements IEmitter {
 				
 				laser = new LineSegment(intersection.point, newDirection);
 			}
-			else{
+			else {
 				g.drawLine((float)laser.getStartPoint().x,(float)laser.getStartPoint().y,(float)laser.getEndPoint().x,(float)laser.getEndPoint().y);
 				break;
 			}

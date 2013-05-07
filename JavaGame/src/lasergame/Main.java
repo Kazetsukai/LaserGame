@@ -1,5 +1,6 @@
 package lasergame;
 import lasergame.levels.Level1;
+import lasergame.levels.Levelx;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.*;
@@ -8,6 +9,8 @@ public class Main extends BasicGame
 	static int windowX = 800;
 	static int windowY = 600;
 	static Level1 level1 = new Level1();
+	static Levelx levelx = new Levelx();
+	
   public Main()
   {
      super("Hello World");
@@ -27,7 +30,7 @@ public class Main extends BasicGame
   @Override
   public void update(GameContainer gc, int delta) throws SlickException
   {
-	  System.out.println(delta);
+	  //System.out.println(delta);
 	  
 	  double timeElapsed = delta / 1000.0;
 	  
