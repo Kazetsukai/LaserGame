@@ -16,9 +16,25 @@ public class Wall implements ILevelEntity {
 	protected LineSegment mLine;
 	protected double mWidth;
 	
+
+	protected Vector2 mTopLeft;
+	protected Vector2 mBottomLeft;
+	protected Vector2 mTopRight;
+	protected Vector2 mBottomRight;
+	protected Vector2 mNormal;
+	
 	public Wall(LineSegment line, double width){
 		mLine = line;
 		mWidth = width;
+		
+		mNormal = mLine.getDisplacement().normalLeft().multiply(mWidth);
+		Vector2 start = mLine.getStartPoint();
+		Vector2 end = mLine.getEndPoint();
+		
+		mTopLeft = start.add(mNormal);
+		mBottomLeft = start.subtract(mNormal);
+		mTopRight = end.add(mNormal);
+		mBottomRight = end.subtract(mNormal);
 	}
 
 	@Override
@@ -28,19 +44,10 @@ public class Wall implements ILevelEntity {
 	
 	@Override
 	public void render(GameContainer gc, Graphics g) {
-		Vector2 normal = mLine.getDisplacement().normalLeft().multiply(mWidth);
-		Vector2 start = mLine.getStartPoint();
-		Vector2 end = mLine.getEndPoint();
-		
-		Vector2 topLeft = start.add(normal);
-		Vector2 bottomLeft = start.subtract(normal);
-		Vector2 topRight = end.add(normal);
-		Vector2 bottomRight = end.subtract(normal);
-
-		g.draw(getLine(topLeft, topRight));
-		g.draw(getLine(topRight, bottomRight));
-		g.draw(getLine(bottomRight, bottomLeft));
-		g.draw(getLine(bottomLeft, topLeft));
+		g.draw(getLine(mTopLeft, mTopRight));
+		g.draw(getLine(mTopRight, mBottomRight));
+		g.draw(getLine(mBottomRight, mBottomLeft));
+		g.draw(getLine(mBottomLeft, mTopLeft));
 	}
 
 	protected Line getLine(Vector2 start, Vector2 end) {

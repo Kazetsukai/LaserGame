@@ -3,31 +3,33 @@ package lasergame.levelentities;
 import java.util.ArrayList;
 import java.util.List;
 
-import lasergame.ILevel;
-import lasergame.ILevelEntity;
-import lasergame.Intersection;
-import lasergame.geometry.LineSegment;
-import lasergame.vectormath.Vector2;
+import lasergame.*;
+import lasergame.geometry.*;
+import lasergame.vectormath.*;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.*;
 
-public class LaserBeam implements ILevelEntity {
+public class LaserBeam implements IPhysicsEntity {
 
 	ILevel _level;
 	Vector2 _location;
 	Vector2 _velocity;
+	Vector2 _accum;
 	
 	public LaserBeam(ILevel level, Vector2 location, Vector2 velocity) {
 		_level = level;
 		_location = location;
 		_velocity = velocity;
+		_accum = new Vector2(0,0);
 	}
 	
 	@Override
 	public void render(GameContainer gc, Graphics g) {
 		g.drawOval((float)_location.x - 5, (float)_location.y - 5, 10, 10);
+		
+		Vector2 acc = _location.add(_accum.multiply(5));
+		g.drawLine((float)_location.x, (float)_location.y, (float)acc.x, (float)acc.y);
+		_accum = new Vector2(0,0);
 	}
 
 	@Override
@@ -52,12 +54,24 @@ public class LaserBeam implements ILevelEntity {
 		}
 		
 		_location = newLocation;
+
 	}
 
 	@Override
 	public List<Intersection> getIntersectionsWith(LineSegment line) {
 		// TODO Auto-generated method stub
 		return new ArrayList<Intersection>();
+	}
+
+	@Override
+	public void impulse(Vector2 impulse) {
+		_accum = _accum.add(impulse);
+		_velocity = _velocity.add(impulse);
+	}
+
+	@Override
+	public Vector2 getCentreOfMass() {
+		return _location;
 	}
 
 }

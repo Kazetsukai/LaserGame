@@ -6,6 +6,7 @@ import java.util.List;
 
 import lasergame.ILevel;
 import lasergame.ILevelEntity;
+import lasergame.IPhysicsEntity;
 import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
 import lasergame.levelentities.GravityWell;
@@ -20,11 +21,11 @@ import org.newdawn.slick.Graphics;
 public class Levelx implements ILevel 
 {
 	public List<ILevelEntity> mLevelEntities = new ArrayList<ILevelEntity>(Arrays.asList(
-			(ILevelEntity)new GravityWell(200, 200, this),
-			(ILevelEntity)new GravityWell(300, 400, this),
-			(ILevelEntity)new GravityWell(600, 500, this),
-			(ILevelEntity)new GravityWell(400, 100, this),
-			(ILevelEntity)new GravityWell(500, 200, this),
+			//(ILevelEntity)new GravityWell(200, 200, this),
+			//(ILevelEntity)new GravityWell(300, 400, this),
+			//(ILevelEntity)new GravityWell(600, 500, this),
+			//(ILevelEntity)new GravityWell(400, 100, this),
+			//(ILevelEntity)new GravityWell(500, 200, this),
 			(ILevelEntity)new LaserEmitter(100, 500, this)));
 	
 	private LaserEmitter _emitter = new LaserEmitter(100, 500, this);
@@ -91,5 +92,11 @@ public class Levelx implements ILevel
 	public void kill(ILevelEntity entity) 
 	{
 		mEntitiesToRemove.add(entity);
+	}
+
+	@Override
+	public List<IPhysicsEntity> getPhysicsEntities() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

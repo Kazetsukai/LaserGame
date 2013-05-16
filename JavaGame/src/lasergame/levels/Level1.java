@@ -6,6 +6,7 @@ import java.util.List;
 
 import lasergame.ILevel;
 import lasergame.ILevelEntity;
+import lasergame.IPhysicsEntity;
 import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
 import lasergame.levelentities.BrickWall;
@@ -78,5 +79,11 @@ public class Level1 implements ILevel {
 	@Override
 	public void kill(ILevelEntity entity) {
 		mEntitiesToRemove.add(entity);
+	}
+
+	@Override
+	public List<IPhysicsEntity> getPhysicsEntities() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

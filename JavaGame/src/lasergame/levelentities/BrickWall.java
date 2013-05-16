@@ -21,25 +21,38 @@ public class BrickWall extends Wall {
 	
 	public BrickWall(LineSegment line, double width) {
 		super(line, width);
-		try{
-		mWallTexture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/BlueGreenBrick.png"));
-		}catch(IOException ex){}
 	}
 	@Override
-	public void render(GameContainer gc, Graphics g) {
-
+	public void render(GameContainer gc, Graphics g) {		
+		if(mWallTexture == null)
+		{
+			try
+			{
+				mWallTexture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/BlueGreenBrick.png"));
+			}
+			catch(IOException ex)
+			{
+				System.out.println(ex);
+			}
+		}
+		
 		mWallTexture.bind();
 		
-		GL11.glColor3f(1,1,1);
+		//GL11.glColor3f(1 ,1, 1);
 		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glVertex2f(100,100);
-		GL11.glTexCoord2f(0,0);
-		GL11.glVertex2f(140,100);
-		GL11.glTexCoord2f(1,0);
-		GL11.glVertex2f(140,140);
-		GL11.glTexCoord2f(1,1);
-		GL11.glVertex2f(100,100);
-		GL11.glTexCoord2f(0,1);
+		
+		GL11.glTexCoord2f(0, 0);
+		GL11.glVertex2d(mTopLeft.x, mTopLeft.y);
+		
+		GL11.glTexCoord2f(3, 0);
+		GL11.glVertex2d(mTopRight.x, mTopRight.y);
+		
+		GL11.glTexCoord2f(3, 1);
+		GL11.glVertex2d(mBottomRight.x, mBottomRight.y);
+		
+		GL11.glTexCoord2f(0, 1);
+		GL11.glVertex2d(mBottomLeft.x, mBottomLeft.y);
+		
 		GL11.glEnd();
 	}
 	
