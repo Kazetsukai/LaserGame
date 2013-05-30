@@ -32,7 +32,7 @@ public class LaserEmitter implements IEmitter {
 		Vector2 currentLoc = new Vector2(mX, mY);
 		
 		if (input.isMousePressed(input.MOUSE_LEFT_BUTTON)) {
-			mLevel.spawn(new LaserBeam(mLevel, currentLoc, mouseLoc.subtract(currentLoc).normalise().multiply(500)));
+			mLevel.spawn(new LaserBeam(mLevel, currentLoc, mouseLoc.subtract(currentLoc).normalise().multiply(100)));
 		}
 	}
 	

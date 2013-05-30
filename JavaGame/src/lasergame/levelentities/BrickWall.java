@@ -28,7 +28,7 @@ public class BrickWall extends Wall {
 		{
 			try
 			{
-				mWallTexture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/BlueGreenBrick.png"));
+				mWallTexture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("JavaGame/res/BlueGreenBrick.png"));
 			}
 			catch(IOException ex)
 			{
