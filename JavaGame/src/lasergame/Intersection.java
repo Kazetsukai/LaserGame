@@ -7,15 +7,15 @@ import java.util.List;
 import lasergame.vectormath.Vector2;
 
 public class Intersection {
-	public Intersection(Vector2 point, Vector2 normal, double distance, ILevelEntity entity){
+	public Intersection(Vector2 point, Vector2 tangent, double distance, ILevelEntity entity){
 		this.point = point;
-		this.normal = normal;
+		this.tangent = tangent;
 		this.distance = distance;
 		this.entity = entity;
 	}
-	
+
 	public Vector2 point;
-	public Vector2 normal;
+	public Vector2 tangent;
 	public double distance;
 	public ILevelEntity entity;
 	

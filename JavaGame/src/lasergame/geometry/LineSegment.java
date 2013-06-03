@@ -52,7 +52,15 @@ public class LineSegment {
 		return new LineSegment(this.mStartPoint, this.mDisplacement.multiply(scale));
 	}
 
-	public Vector2 getIntersection(LineSegment rhs) {
+	public Vector2 getSegmentIntersection(LineSegment rhs) {
+		return getIntersection(rhs, false);
+	}
+	
+	public Vector2 getLineIntersection(LineSegment rhs) {
+		return getIntersection(rhs, true);
+	}
+	
+	private Vector2 getIntersection(LineSegment rhs, boolean infinite) {
 		
 		double cross = this.mDisplacement.crossMagnitude(rhs.mDisplacement);
 		
@@ -64,7 +72,7 @@ public class LineSegment {
 		double t = startPointDiff.crossMagnitude(rhs.mDisplacement) / cross;
 		double u = startPointDiff.crossMagnitude(this.mDisplacement) / cross;
 		
-		if (t <= Constants.EPSILON || t > 1 || u < 0 || u > 1) 
+		if (!infinite && (t <= Constants.EPSILON || t > 1 || u < 0 || u > 1)) 
 			return null; // the infinite lines are colliding, but not within the line segments 
 		
 		return this.mStartPoint.add(this.mDisplacement.multiply(t));
@@ -80,5 +88,13 @@ public class LineSegment {
 	
 	public boolean isPointOnRight(Vector2 rhs) {
 		return leftnessOfPoint(rhs) < 0;
+	}
+	
+	public Vector2 reflectPoint(Vector2 rhs) {
+		return rhs.subtract(mStartPoint).reflectOver(mDisplacement).add(mStartPoint);
+	}
+	
+	public Vector2 nearestPointTo(Vector2 rhs) {
+		return rhs.subtract(mStartPoint).projectOnto(mDisplacement).add(mStartPoint);
 	}
 }

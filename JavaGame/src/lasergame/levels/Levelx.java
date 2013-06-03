@@ -89,7 +89,7 @@ public class Levelx implements ILevel
 	}
 	
 	@Override
-	public void kill(ILevelEntity entity) 
+	public void remove(ILevelEntity entity) 
 	{
 		mEntitiesToRemove.add(entity);
 	}

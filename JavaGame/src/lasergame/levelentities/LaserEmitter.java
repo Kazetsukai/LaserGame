@@ -46,7 +46,7 @@ public class LaserEmitter implements IEmitter {
 		for (int j = 0; j < 100; j++) {
 			List<Intersection> intersections = mLevel.getIntersectionsWith(laser);
 			
-			if(intersections.size() > 0) {
+			/*if(intersections.size() > 0) {
 				Intersection.sortIntersections(intersections);
 				Intersection intersection = intersections.get(0);
 				Vector2 point = intersection.point;
@@ -66,7 +66,7 @@ public class LaserEmitter implements IEmitter {
 			else {
 				g.drawLine((float)laser.getStartPoint().x,(float)laser.getStartPoint().y,(float)laser.getEndPoint().x,(float)laser.getEndPoint().y);
 				break;
-			}
+			}*/
 		}
 		
 		g.draw(new Circle(mX,mY, 10));

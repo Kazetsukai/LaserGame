@@ -113,4 +113,6 @@ public final class Vector2 {
 	public final Vector2 reflectOver(Vector2 rhs) {
 		return this.add(this.projectOnto(rhs).subtract(this).multiply(2));
 	}
+	
+	public static final Vector2 Zero = new Vector2(0,0);
 }

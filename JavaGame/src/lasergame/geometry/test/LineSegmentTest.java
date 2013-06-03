@@ -56,7 +56,7 @@ public class LineSegmentTest {
 		final LineSegment segA = LineSegment.fromPoints(new Vector2(2, 3), new Vector2(3, 4));
 		final LineSegment segB = LineSegment.fromPoints(new Vector2(3, 3), new Vector2(2, 4));
 		
-		Vector2 intersection = segA.getIntersection(segB);
+		Vector2 intersection = segA.getSegmentIntersection(segB);
 
 		assertEquals(2.5, intersection.x, Constants.EPSILON);
 		assertEquals(3.5, intersection.y, Constants.EPSILON);
@@ -67,7 +67,7 @@ public class LineSegmentTest {
 		final LineSegment segA = LineSegment.fromPoints(new Vector2(0, 3), new Vector2(0, 4));
 		final LineSegment segB = LineSegment.fromPoints(new Vector2(3, 3), new Vector2(-3, 5));
 		
-		Vector2 intersection = segA.getIntersection(segB);
+		Vector2 intersection = segA.getSegmentIntersection(segB);
 
 		assertEquals(0.0, intersection.x, Constants.EPSILON);
 		assertEquals(4.0, intersection.y, Constants.EPSILON);
@@ -78,7 +78,7 @@ public class LineSegmentTest {
 		final LineSegment segA = LineSegment.fromPoints(new Vector2(0, 3), new Vector2(0, 4));
 		final LineSegment segB = LineSegment.fromPoints(new Vector2(3, 3), new Vector2(-3, 5.0001));
 		
-		Vector2 intersection = segA.getIntersection(segB);
+		Vector2 intersection = segA.getSegmentIntersection(segB);
 
 		assertNull(intersection);
 	}
@@ -88,7 +88,7 @@ public class LineSegmentTest {
 		final LineSegment segA = LineSegment.fromPoints(new Vector2(2, 3), new Vector2(3, 4));
 		final LineSegment segB = LineSegment.fromPoints(new Vector2(3, 3), new Vector2(3.5, 4));
 		
-		Vector2 intersection = segA.getIntersection(segB);
+		Vector2 intersection = segA.getSegmentIntersection(segB);
 
 		assertNull(intersection);
 	}
@@ -98,7 +98,7 @@ public class LineSegmentTest {
 		final LineSegment segA = LineSegment.fromPoints(new Vector2(2, 3), new Vector2(3, 4));
 		final LineSegment segB = LineSegment.fromPoints(new Vector2(3, 3), new Vector2(4, 4));
 		
-		Vector2 intersection = segA.getIntersection(segB);
+		Vector2 intersection = segA.getSegmentIntersection(segB);
 
 		assertNull(intersection);
 	}
@@ -162,6 +162,16 @@ public class LineSegmentTest {
 	}
 	
 	@Test
+	public void testLeftNormalIsOnLeft() {
+		final LineSegment seg = LineSegment.fromPoints(new Vector2(2, 3), new Vector2(3, 4));
+		
+		Vector2 pointLeft = seg.getStartPoint().add(seg.getDisplacement().normalLeft());
+		boolean result = seg.isPointOnLeft(pointLeft);
+		
+		assertTrue(result);
+	}
+	
+	@Test
 	public void testPointOnLineIsNeitherLeftNorRight() {
 		final LineSegment seg = LineSegment.fromPoints(new Vector2(2, 3), new Vector2(3, 4));
 		final Vector2 point = new Vector2(2.5, 3.5);
@@ -172,4 +182,49 @@ public class LineSegmentTest {
 		assertFalse(onLeft);
 		assertFalse(onRight);
 	}
+	
+	@Test
+	public void testReflectPointOverVertical() {
+		final LineSegment seg = LineSegment.fromPoints(new Vector2(2, 3), new Vector2(2, 40));
+		final Vector2 point = new Vector2(-6, 25);
+		
+		Vector2 reflected = seg.reflectPoint(point);
+
+		assertEquals(10.0, reflected.x, Constants.EPSILON);
+		assertEquals(25.0, reflected.y, Constants.EPSILON);
+	}
+	
+	@Test
+	public void testReflectPointOverDiagonal() {
+		final LineSegment seg = LineSegment.fromPoints(new Vector2(2, 2), new Vector2(12, 22));
+		final Vector2 point = new Vector2(5, 13);
+		
+		Vector2 reflected = seg.reflectPoint(point);
+
+		assertEquals(9.0, reflected.x, Constants.EPSILON);
+		assertEquals(11.0, reflected.y, Constants.EPSILON);
+	}
+
+	@Test
+	public void testNearestPointToVertical() {
+		final LineSegment seg = LineSegment.fromPoints(new Vector2(2, 3), new Vector2(2, 40));
+		final Vector2 point = new Vector2(-6, 25);
+		
+		Vector2 reflected = seg.nearestPointTo(point);
+
+		assertEquals(2.0, reflected.x, Constants.EPSILON);
+		assertEquals(25.0, reflected.y, Constants.EPSILON);
+	}
+	
+	@Test
+	public void testNearestPointToDiagonal() {
+		final LineSegment seg = LineSegment.fromPoints(new Vector2(2, 2), new Vector2(12, 22));
+		final Vector2 point = new Vector2(5, 13);
+		
+		Vector2 reflected = seg.nearestPointTo(point);
+
+		assertEquals(7.0, reflected.x, Constants.EPSILON);
+		assertEquals(12.0, reflected.y, Constants.EPSILON);
+	}
+	
 }

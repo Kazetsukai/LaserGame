@@ -8,5 +8,5 @@ public interface ILevel extends IRenderable{
 	 List<Intersection> getIntersectionsWith(LineSegment ls);
 	 List<IPhysicsEntity> getPhysicsEntities();
 	 void spawn(ILevelEntity entity);
-	 void kill(ILevelEntity entity);
+	 void remove(ILevelEntity entity);
 }

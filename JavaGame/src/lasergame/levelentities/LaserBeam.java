@@ -11,6 +11,8 @@ import org.newdawn.slick.*;
 
 public class LaserBeam implements IPhysicsEntity {
 
+	private static final double CULL_DISTANCE = 5000;
+	
 	ILevel _level;
 	Vector2 _location;
 	Vector2[] _tail;
@@ -22,6 +24,7 @@ public class LaserBeam implements IPhysicsEntity {
 	
 	final static int num_tail = 1000;
 	final static float beam_length = 0.25f;
+	
 	
 	public LaserBeam(ILevel level, Vector2 location, Vector2 velocity) {
 		_level = level;
@@ -58,37 +61,57 @@ public class LaserBeam implements IPhysicsEntity {
 	@Override
 	public void update(GameContainer gc, double timeElapsed) {
 		
-		Vector2 newLocation = _location.add(_velocity.multiply((timeElapsed)));
+		_location = _location.add(_velocity.multiply((timeElapsed)));
 		
 		if (!_dying) {
-		LineSegment laser = LineSegment.fromPoints(_location, newLocation.add(_velocity.multiply(0.01)));
-		List<Intersection> intersections = _level.getIntersectionsWith(laser);
+			
+			pushTailPoint(_location);
+			
+			boolean done = false;
+			int bounces = 0;
+			
+			while (!done) {
+				LineSegment laser = LineSegment.fromPoints(_location, _location.add(_velocity));
+				List<Intersection> intersections = _level.getIntersectionsWith(laser);
+		
+				if(intersections.size() > 0) {
+					Intersection.sortIntersections(intersections);
+					Intersection intersection = intersections.get(0);
+					
+					LineSegment line = new LineSegment(intersection.point, intersection.tangent);
+					
+					_location = line.reflectPoint(_location);
+					_velocity = _velocity.reflectOver(intersection.tangent);
+					
+					bounces++;
+				}
+				else {
+					done = true;
+				}
+				
+				if (bounces > 3) {
+					this.kill();
+					done = true;
+				}
+			}
+		} else {
+			_velocity = _velocity.normalise().multiply(_velocity.length() - _velocityAtDeath * timeElapsed * 2);
+			if (_velocity.length() <= 0.1) {
+				_level.remove(this);
+			}
+		}
+		
+		// Kill any beams that are far away from the origin
+		if (_location.length() > CULL_DISTANCE) {
+			_level.remove(this);
+		}
+	}
 
-		Vector2 nextPoint = _location;
+	private void pushTailPoint(Vector2 nextPoint) {
 		for(int i = 0; i< num_tail; i++){
 			Vector2 temp = _tail[i];
 			_tail[i] = nextPoint;
 			nextPoint = temp;
-		}
-		
-		if(intersections.size() > 0) {
-			Intersection.sortIntersections(intersections);
-			Intersection intersection = intersections.get(0);
-			Vector2 tangent = intersection.normal.normalLeft();
-			
-			Vector2 newDirection = laser.getDisplacement().reflectOver(tangent);
-			
-			LineSegment reflectedBeam = new LineSegment(intersection.point, newDirection.normalise().multiply(_velocity.length()));
-			_level.spawn(new LaserBeam(_level, reflectedBeam.getStartPoint(), reflectedBeam.getDisplacement()));
-			this.kill();
-		}
-		
-		_location = newLocation;
-		} else {
-			_velocity = _velocity.normalise().multiply(_velocity.length() - _velocityAtDeath * timeElapsed * 2);
-			if (_velocity.length() < 0) {
-				_level.kill(this);
-			}
 		}
 	}
 

@@ -1,6 +1,7 @@
 package lasergame.levelentities;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import lasergame.ILevelEntity;
@@ -23,6 +24,8 @@ public class Wall implements ILevelEntity {
 	protected Vector2 mBottomRight;
 	protected Vector2 mNormal;
 	
+	protected LineSegment[] mWalls = new LineSegment[4];
+	
 	public Wall(LineSegment line, double width){
 		mLine = line;
 		mWidth = width;
@@ -35,6 +38,11 @@ public class Wall implements ILevelEntity {
 		mBottomLeft = start.subtract(mNormal);
 		mTopRight = end.add(mNormal);
 		mBottomRight = end.subtract(mNormal);
+
+		mWalls[0] = LineSegment.fromPoints(mTopLeft, mTopRight);
+		mWalls[1] = LineSegment.fromPoints(mTopRight, mBottomRight);
+		mWalls[2] = LineSegment.fromPoints(mBottomRight, mBottomLeft);
+		mWalls[3] = LineSegment.fromPoints(mBottomLeft, mTopLeft);
 	}
 
 	@Override
@@ -57,34 +65,31 @@ public class Wall implements ILevelEntity {
 	@Override
 	public List<Intersection> getIntersectionsWith(LineSegment line) {
 		
-		ArrayList<Intersection> intersections = new ArrayList<Intersection>();
+		LinkedList<Intersection> intersections = new LinkedList<Intersection>();
 
-		Vector2 normal = mLine.getDisplacement().normalLeft().multiply(mWidth);
-		Vector2 start = mLine.getStartPoint();
-		Vector2 end = mLine.getEndPoint();
-		Vector2 length = mLine.getDisplacement();
+		double minDistance = Double.MAX_VALUE;
+		LineSegment closestWall = null;
+		for (LineSegment wall : mWalls) {
+			Vector2 position = line.getStartPoint();
+			
+			// If we are to the left of any segment, then we are not inside
+			if (wall.isPointOnLeft(position)) {
+				closestWall = null;
+				break;
+			}
+			
+			double distanceToThisWall = wall.nearestPointTo(position).subtract(position).length();
+			if (distanceToThisWall < minDistance) {
+				minDistance = distanceToThisWall;
+				closestWall = wall;
+			}
+		}
 		
-		LineSegment top = new LineSegment(start.add(normal), length);
-		LineSegment bottom = new LineSegment(start.subtract(normal), length);
-		LineSegment left = new LineSegment(start.add(normal), normal.multiply(-2));
-		LineSegment right = new LineSegment(end.add(normal), normal.multiply(-2));
-		
-		Vector2 vTop = line.getIntersection(top);
-		Vector2 vBottom = line.getIntersection(bottom);
-		Vector2 vLeft = line.getIntersection(left);
-		Vector2 vRight = line.getIntersection(right);
-
-		if(vTop != null) {
-			intersections.add(new Intersection(vTop, top.getDisplacement().normalLeft(), vTop.subtract(line.getStartPoint()).length(), this));
-		}
-		if(vBottom != null) {
-			intersections.add(new Intersection(vBottom, bottom.getDisplacement().normalRight(), vBottom.subtract(line.getStartPoint()).length(), this));
-		}
-		if(vLeft != null) {
-			intersections.add(new Intersection(vLeft, left.getDisplacement().normalRight(), vLeft.subtract(line.getStartPoint()).length(), this));
-		}
-		if(vRight != null) {
-			intersections.add(new Intersection(vRight, right.getDisplacement().normalLeft(), vRight.subtract(line.getStartPoint()).length(), this));
+		if (closestWall != null) {
+			Vector2 vec = line.getLineIntersection(closestWall);
+			if (vec != null) {
+				intersections.add(new Intersection(vec, closestWall.getDisplacement(), vec.subtract(line.getStartPoint()).length(), this));
+			}
 		}
 		
 		return intersections;

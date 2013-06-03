@@ -38,10 +38,15 @@ public class Main extends BasicGame
 	  
 	  int updatesThisFrame = 0;
 	  
-	  while (mTimeLeftOver > TIMESTEP && updatesThisFrame < 20) {
+	  while (mTimeLeftOver > TIMESTEP) {
 		  mTimeLeftOver -= TIMESTEP;
 		  updatesThisFrame++;
 		  lukesLevel.update(gc, TIMESTEP);
+		  
+		  if (updatesThisFrame > 20) {
+			  mTimeLeftOver = 0;
+			  break;
+		  }
 	  }
   }
  

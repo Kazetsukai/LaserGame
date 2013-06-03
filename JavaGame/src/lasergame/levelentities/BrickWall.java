@@ -55,40 +55,4 @@ public class BrickWall extends Wall {
 		
 		GL11.glEnd();
 	}
-	
-	@Override
-	public List<Intersection> getIntersectionsWith(LineSegment line) {
-		
-		ArrayList<Intersection> intersections = new ArrayList<Intersection>();
-
-		Vector2 normal = mLine.getDisplacement().normalLeft().multiply(mWidth);
-		Vector2 start = mLine.getStartPoint();
-		Vector2 end = mLine.getEndPoint();
-		Vector2 length = mLine.getDisplacement();
-		
-		LineSegment top = new LineSegment(start.add(normal), length);
-		LineSegment bottom = new LineSegment(start.subtract(normal), length);
-		LineSegment left = new LineSegment(start.add(normal), normal.multiply(-2));
-		LineSegment right = new LineSegment(end.add(normal), normal.multiply(-2));
-		
-		Vector2 vTop = line.getIntersection(top);
-		Vector2 vBottom = line.getIntersection(bottom);
-		Vector2 vLeft = line.getIntersection(left);
-		Vector2 vRight = line.getIntersection(right);
-
-		if(vTop != null) {
-			intersections.add(new Intersection(vTop, top.getDisplacement().normalLeft(), vTop.subtract(line.getStartPoint()).length(), this));
-		}
-		if(vBottom != null) {
-			intersections.add(new Intersection(vBottom, bottom.getDisplacement().normalRight(), vBottom.subtract(line.getStartPoint()).length(), this));
-		}
-		if(vLeft != null) {
-			intersections.add(new Intersection(vLeft, left.getDisplacement().normalRight(), vLeft.subtract(line.getStartPoint()).length(), this));
-		}
-		if(vRight != null) {
-			intersections.add(new Intersection(vRight, right.getDisplacement().normalLeft(), vRight.subtract(line.getStartPoint()).length(), this));
-		}
-		
-		return intersections;
-	}
 }
