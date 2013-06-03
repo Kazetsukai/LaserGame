@@ -23,7 +23,7 @@ public class LaserBeam implements IPhysicsEntity {
 	double _velocityAtDeath = 0;
 	
 	final static int num_tail = 1000;
-	final static float beam_length = 0.25f;
+	final static float beam_length = 0.05f;
 	
 	
 	public LaserBeam(ILevel level, Vector2 location, Vector2 velocity) {
@@ -65,7 +65,6 @@ public class LaserBeam implements IPhysicsEntity {
 		
 		if (!_dying) {
 			
-			pushTailPoint(_location);
 			
 			boolean done = false;
 			int bounces = 0;
@@ -79,6 +78,8 @@ public class LaserBeam implements IPhysicsEntity {
 					Intersection intersection = intersections.get(0);
 					
 					LineSegment line = new LineSegment(intersection.point, intersection.tangent);
+					
+					pushTailPoint(intersection.point);
 					
 					_location = line.reflectPoint(_location);
 					_velocity = _velocity.reflectOver(intersection.tangent);
@@ -100,6 +101,8 @@ public class LaserBeam implements IPhysicsEntity {
 				_level.remove(this);
 			}
 		}
+		
+		pushTailPoint(_location);
 		
 		// Kill any beams that are far away from the origin
 		if (_location.length() > CULL_DISTANCE) {

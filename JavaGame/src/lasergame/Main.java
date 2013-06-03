@@ -13,7 +13,7 @@ public class Main extends BasicGame
 	static LukesLevel lukesLevel = new LukesLevel();
 	static Levelx levelx = new Levelx();
 	
-	static final double TIMESTEP = 0.01;
+	static final double TIMESTEP = 0.001;
 	
 	double mTimeLeftOver = 0;
 	
