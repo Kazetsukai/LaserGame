@@ -43,11 +43,13 @@ public class Main extends BasicGame
 		  updatesThisFrame++;
 		  lukesLevel.update(gc, TIMESTEP);
 		  
-		  if (updatesThisFrame > 20) {
+		  if (updatesThisFrame > 1 / TIMESTEP) {
 			  mTimeLeftOver = 0;
 			  break;
 		  }
 	  }
+	  
+	  System.out.println("     Updates: " + updatesThisFrame);
   }
  
   @Override
