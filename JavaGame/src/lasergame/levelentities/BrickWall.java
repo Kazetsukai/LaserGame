@@ -1,7 +1,6 @@
 package lasergame.levelentities;
 
 import java.io.IOException;
-
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

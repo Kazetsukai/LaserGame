@@ -93,4 +93,10 @@ public class Levelx implements ILevel
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void win() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -114,5 +114,9 @@ public final class Vector2 {
 		return this.add(this.projectOnto(rhs).subtract(this).multiply(2));
 	}
 	
+	public final double distanceTo(Vector2 rhs) {
+		return this.subtract(rhs).length();
+	}
+	
 	public static final Vector2 Zero = new Vector2(0,0);
 }

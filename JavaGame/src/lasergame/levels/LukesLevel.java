@@ -24,7 +24,8 @@ public class LukesLevel implements ILevel {
 			(ILevelEntity)new BrickWall(new LineSegment(new Vector2(30, 450), new Vector2(0, -40)), 10),
 			(ILevelEntity)new GravityWell(400,400,40,300, this),
 			(ILevelEntity)new LaserEmitter(100,500, this),
-			(ILevelEntity)new Target(600, 500)));
+			(ILevelEntity)new Target(600, 500, 30, 40, this)
+			));
 	
 
 	private ArrayList<ILevelEntity> mEntitiesToAdd = new ArrayList<ILevelEntity>();
@@ -87,5 +88,11 @@ public class LukesLevel implements ILevel {
 		}
 		
 		return physicsEntities;
+	}
+
+	@Override
+	public void win() {
+		//umm, you win?
+		System.exit(0);
 	}
 }

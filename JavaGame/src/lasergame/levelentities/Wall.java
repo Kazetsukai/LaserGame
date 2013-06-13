@@ -3,6 +3,7 @@ package lasergame.levelentities;
 import java.util.*;
 
 import lasergame.ILevelEntity;
+import lasergame.IStrikable;
 import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
 import lasergame.vectormath.Vector2;
@@ -11,7 +12,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.*;
 
-public class Wall implements ILevelEntity {
+public class Wall implements ILevelEntity, IStrikable {
 	protected LineSegment mLine;
 	protected double mWidth;
 	
@@ -91,5 +92,11 @@ public class Wall implements ILevelEntity {
 		}
 		
 		return intersections;
+	}
+
+	@Override
+	public void strike(ILevelEntity entity) {
+		// TODO Auto-generated method stub
+		
 	}
 }

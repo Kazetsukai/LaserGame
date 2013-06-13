@@ -77,6 +77,9 @@ public class LaserBeam implements IPhysicsEntity {
 					Intersection.sortIntersections(intersections);
 					Intersection intersection = intersections.get(0);
 					
+					if (intersection.entity instanceof IStrikable)
+						((IStrikable)intersection.entity).strike(this);
+					
 					LineSegment line = new LineSegment(intersection.point, intersection.tangent);
 					
 					pushTailPoint(intersection.point);

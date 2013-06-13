@@ -22,8 +22,7 @@ public class Level1 implements ILevel {
 			(ILevelEntity)new Wall(new LineSegment(new Vector2(820, 300), new Vector2(-70, 300)), 30),
 			(ILevelEntity)new Wall(new LineSegment(new Vector2(50, 430), new Vector2(-40, 0)), 10),
 			(ILevelEntity)new Wall(new LineSegment(new Vector2(30, 450), new Vector2(0, -40)), 10),
-			(ILevelEntity)new LaserEmitter(100,500, this),
-			(ILevelEntity)new Target(600, 500)));
+			(ILevelEntity)new LaserEmitter(100,500, this)));
 	
 
 	private ArrayList<ILevelEntity> mEntitiesToAdd = new ArrayList<ILevelEntity>();
@@ -80,5 +79,11 @@ public class Level1 implements ILevel {
 	public List<IPhysicsEntity> getPhysicsEntities() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void win() {
+		// TODO Auto-generated method stub
+		
 	}
 }
