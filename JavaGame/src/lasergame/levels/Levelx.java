@@ -9,11 +9,7 @@ import lasergame.ILevelEntity;
 import lasergame.IPhysicsEntity;
 import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
-import lasergame.levelentities.GravityWell;
-import lasergame.levelentities.LaserEmitter;
-import lasergame.levelentities.Target;
-import lasergame.levelentities.Wall;
-import lasergame.vectormath.Vector2;
+import lasergame.levelentities.*;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -28,8 +24,6 @@ public class Levelx implements ILevel
 			//(ILevelEntity)new GravityWell(500, 200, this),
 			(ILevelEntity)new LaserEmitter(100, 500, this)));
 	
-	private LaserEmitter _emitter = new LaserEmitter(100, 500, this);
-	private Target _target = new Target(600, 500);
 
 	private ArrayList<ILevelEntity> mEntitiesToAdd = new ArrayList<ILevelEntity>();
 	private ArrayList<ILevelEntity> mEntitiesToRemove = new ArrayList<ILevelEntity>();

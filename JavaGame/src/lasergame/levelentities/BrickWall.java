@@ -1,8 +1,6 @@
 package lasergame.levelentities;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.GameContainer;
@@ -11,9 +9,7 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
-import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
-import lasergame.vectormath.Vector2;
 
 public class BrickWall extends Wall {
 

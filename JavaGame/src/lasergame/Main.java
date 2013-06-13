@@ -3,7 +3,6 @@ import lasergame.levels.Level1;
 import lasergame.levels.Levelx;
 import lasergame.levels.LukesLevel;
 
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.*;
 public class Main extends BasicGame
 {

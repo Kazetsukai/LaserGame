@@ -31,7 +31,7 @@ public class LaserEmitter implements IEmitter {
 		Vector2 mouseLoc = new Vector2(input.getMouseX(), input.getMouseY());
 		Vector2 currentLoc = new Vector2(mX, mY);
 		
-		if (input.isMousePressed(input.MOUSE_LEFT_BUTTON)) {
+		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			mLevel.spawn(new LaserBeam(mLevel, currentLoc, mouseLoc.subtract(currentLoc).normalise().multiply(1000)));
 		}
 	}
@@ -44,7 +44,7 @@ public class LaserEmitter implements IEmitter {
 		laser = laser.scale(1000);
 		
 		for (int j = 0; j < 100; j++) {
-			List<Intersection> intersections = mLevel.getIntersectionsWith(laser);
+			//List<Intersection> intersections = mLevel.getIntersectionsWith(laser);
 			
 			/*if(intersections.size() > 0) {
 				Intersection.sortIntersections(intersections);

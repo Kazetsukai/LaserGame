@@ -1,8 +1,6 @@
 package lasergame.levelentities;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import lasergame.ILevelEntity;
 import lasergame.Intersection;

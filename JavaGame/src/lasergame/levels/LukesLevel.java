@@ -26,8 +26,6 @@ public class LukesLevel implements ILevel {
 			(ILevelEntity)new LaserEmitter(100,500, this),
 			(ILevelEntity)new Target(600, 500)));
 	
-	private LaserEmitter _emitter = new LaserEmitter(100,500, this);
-	private Target _target = new Target(600, 500);
 
 	private ArrayList<ILevelEntity> mEntitiesToAdd = new ArrayList<ILevelEntity>();
 	private ArrayList<ILevelEntity> mEntitiesToRemove = new ArrayList<ILevelEntity>();

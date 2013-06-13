@@ -8,7 +8,6 @@ import lasergame.ILevelEntity;
 import lasergame.IPhysicsEntity;
 import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
-import lasergame.levels.Levelx;
 import lasergame.vectormath.Vector2;
 
 import org.newdawn.slick.GameContainer;

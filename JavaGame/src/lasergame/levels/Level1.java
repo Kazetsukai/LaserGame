@@ -9,10 +9,7 @@ import lasergame.ILevelEntity;
 import lasergame.IPhysicsEntity;
 import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
-import lasergame.levelentities.BrickWall;
-import lasergame.levelentities.LaserEmitter;
-import lasergame.levelentities.Target;
-import lasergame.levelentities.Wall;
+import lasergame.levelentities.*;
 import lasergame.vectormath.Vector2;
 
 import org.newdawn.slick.*;
@@ -28,8 +25,6 @@ public class Level1 implements ILevel {
 			(ILevelEntity)new LaserEmitter(100,500, this),
 			(ILevelEntity)new Target(600, 500)));
 	
-	private LaserEmitter _emitter = new LaserEmitter(100,500, this);
-	private Target _target = new Target(600, 500);
 
 	private ArrayList<ILevelEntity> mEntitiesToAdd = new ArrayList<ILevelEntity>();
 	private ArrayList<ILevelEntity> mEntitiesToRemove = new ArrayList<ILevelEntity>();
