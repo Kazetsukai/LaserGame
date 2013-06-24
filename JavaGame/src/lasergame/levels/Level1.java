@@ -27,6 +27,8 @@ public class Level1 implements ILevel {
 
 	private ArrayList<ILevelEntity> mEntitiesToAdd = new ArrayList<ILevelEntity>();
 	private ArrayList<ILevelEntity> mEntitiesToRemove = new ArrayList<ILevelEntity>();
+	private boolean mHasWon = false;
+	
 	
 	@Override
 	public void render(GameContainer gc, Graphics g) {
@@ -83,7 +85,16 @@ public class Level1 implements ILevel {
 
 	@Override
 	public void win() {
-		// TODO Auto-generated method stub
-		
+		mHasWon= true;
+	}
+
+	@Override
+	public ILevel getNextLevel() {
+		return new LukesLevel();
+	}
+
+	@Override
+	public boolean hasWon() {
+		return mHasWon;
 	}
 }

@@ -22,7 +22,7 @@ public class LukesLevel implements ILevel {
 			(ILevelEntity)new BrickWall(new LineSegment(new Vector2(820, 300), new Vector2(-70, 300)), 30),
 			(ILevelEntity)new BrickWall(new LineSegment(new Vector2(50, 430), new Vector2(-40, 0)), 10),
 			(ILevelEntity)new BrickWall(new LineSegment(new Vector2(30, 450), new Vector2(0, -40)), 10),
-			(ILevelEntity)new GravityWell(400,400,40,300, this),
+			//(ILevelEntity)new GravityWell(400,400,40,300, this),
 			(ILevelEntity)new LaserEmitter(100,500, this),
 			(ILevelEntity)new Target(600, 500, 30, 40, this)
 			));
@@ -30,6 +30,7 @@ public class LukesLevel implements ILevel {
 
 	private ArrayList<ILevelEntity> mEntitiesToAdd = new ArrayList<ILevelEntity>();
 	private ArrayList<ILevelEntity> mEntitiesToRemove = new ArrayList<ILevelEntity>();
+	private boolean mHasWon = false;
 	
 	@Override
 	public void render(GameContainer gc, Graphics g) {
@@ -92,7 +93,16 @@ public class LukesLevel implements ILevel {
 
 	@Override
 	public void win() {
-		//umm, you win?
-		System.exit(0);
+		mHasWon= true;
+	}
+
+	@Override
+	public ILevel getNextLevel() {
+		return new Level1();
+	}
+
+	@Override
+	public boolean hasWon() {
+		return mHasWon;
 	}
 }

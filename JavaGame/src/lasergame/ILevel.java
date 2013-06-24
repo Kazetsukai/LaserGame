@@ -12,4 +12,6 @@ public interface ILevel extends IRenderable{
 	 void remove(ILevelEntity entity);
 	 
 	 void win();
+	 boolean hasWon();
+	 ILevel getNextLevel();
 }

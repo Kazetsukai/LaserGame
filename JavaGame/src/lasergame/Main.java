@@ -9,7 +9,7 @@ public class Main extends BasicGame
 	static int windowX = 800;
 	static int windowY = 600;
 	static Level1 level1 = new Level1();
-	static LukesLevel lukesLevel = new LukesLevel();
+	static ILevel currentLevel = new LukesLevel();
 	static Levelx levelx = new Levelx();
 	
 	static final double TIMESTEP = 0.001;
@@ -40,7 +40,7 @@ public class Main extends BasicGame
 	  while (mTimeLeftOver > TIMESTEP) {
 		  mTimeLeftOver -= TIMESTEP;
 		  updatesThisFrame++;
-		  lukesLevel.update(gc, TIMESTEP);
+		  currentLevel.update(gc, TIMESTEP);
 		  
 		  if (updatesThisFrame > 1 / TIMESTEP) {
 			  mTimeLeftOver = 0;
@@ -49,12 +49,16 @@ public class Main extends BasicGame
 	  }
 	  
 	  System.out.println("     Updates: " + updatesThisFrame);
+	  
+	  if(currentLevel.hasWon()){
+		  currentLevel = currentLevel.getNextLevel();
+	  }
   }
  
   @Override
   public void render(GameContainer gc, Graphics g) throws SlickException
   {
-     lukesLevel.render(gc, g);
+	  currentLevel.render(gc, g);
   }
 
  
