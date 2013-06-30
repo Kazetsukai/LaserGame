@@ -9,8 +9,8 @@ public class Main extends BasicGame
 	static int windowX = 800;
 	static int windowY = 600;
 	static Level1 level1 = new Level1();
-	static ILevel currentLevel = new LukesLevel();
-	static Levelx levelx = new Levelx();
+	static ILevel currentLevel = new Levelx();
+	static ILevel levelx = new LukesLevel();
 	
 	static final double TIMESTEP = 0.001;
 	

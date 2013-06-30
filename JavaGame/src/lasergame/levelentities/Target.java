@@ -25,9 +25,9 @@ public class Target implements ILevelEntity, IStrikable {
 	
 	public Target(int x, int y, double targetRadius, double pulseRadius, ILevel level){
 		_level = level;
-		_location = new Vector2(x,y);
+		_location = new Vector2(x, y);
 		_totalTimeElapsed = 0;
-		_targetRadius=targetRadius;
+		_targetRadius = targetRadius;
 		_pulseRadius = pulseRadius;
 	}
 

@@ -10,6 +10,7 @@ import lasergame.IPhysicsEntity;
 import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
 import lasergame.levelentities.*;
+import lasergame.vectormath.Vector2;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -17,13 +18,14 @@ import org.newdawn.slick.Graphics;
 public class Levelx implements ILevel 
 {
 	public List<ILevelEntity> mLevelEntities = new ArrayList<ILevelEntity>(Arrays.asList(
-			//(ILevelEntity)new GravityWell(200, 200, this),
-			//(ILevelEntity)new GravityWell(300, 400, this),
-			//(ILevelEntity)new GravityWell(600, 500, this),
-			//(ILevelEntity)new GravityWell(400, 100, this),
-			//(ILevelEntity)new GravityWell(500, 200, this),
-			(ILevelEntity)new LaserEmitter(100, 500, this)));
-	
+			(ILevelEntity)new Ball(400, 400, 30, this),
+			(ILevelEntity)new Ball(300, 200, 30, this),
+			(ILevelEntity)new Ball(100, 200, 30, this),
+			(ILevelEntity)new Ball(200, 100, 30, this),
+			
+			(ILevelEntity)new LaserEmitter(100, 500, this)
+			));
+
 
 	private ArrayList<ILevelEntity> mEntitiesToAdd = new ArrayList<ILevelEntity>();
 	private ArrayList<ILevelEntity> mEntitiesToRemove = new ArrayList<ILevelEntity>();
@@ -90,24 +92,43 @@ public class Levelx implements ILevel
 	}
 
 	@Override
-	public List<IPhysicsEntity> getPhysicsEntities() {
+	public List<IPhysicsEntity> getPhysicsEntities() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public void win() {
-		mHasWon= true;
+	public void win() 
+	{
+		mHasWon = true;
 	}
 
 	@Override
-	public ILevel getNextLevel() {
+	public ILevel getNextLevel() 
+	{
 		return new LukesLevel();
 	}
 
 	@Override
-	public boolean hasWon() {
-		return mHasWon;
+	public boolean hasWon() 
+	{
+		for(ILevelEntity e : mLevelEntities)
+		{
+			if (e instanceof Ball)
+			{
+				Ball ball = (Ball)e;
+				
+				if (ball.IsOnScreen())
+				{
+					System.out.println("ball still on screen, x: " + ball._location.x + " y: " + ball._location.y);
+					return false;
+				}
+					
+			}
+		}
+		
+		return true;
 	}
 }
