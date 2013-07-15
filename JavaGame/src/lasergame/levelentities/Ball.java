@@ -1,7 +1,6 @@
 package lasergame.levelentities;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
@@ -19,12 +18,10 @@ public class Ball implements ILevelEntity, IStrikable
 {
 	public Vector2 _location;
 	private Vector2 _velocity;
-	private ILevel _level;
 	private float _radius;
 	
 	public Ball(int x, int y, float radius, ILevel level)
 	{
-		_level = level;
 		_location = new Vector2(x, y);
 		_velocity = Vector2.Zero;
 		_radius = radius;

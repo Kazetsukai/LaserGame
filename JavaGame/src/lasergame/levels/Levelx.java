@@ -10,7 +10,6 @@ import lasergame.IPhysicsEntity;
 import lasergame.Intersection;
 import lasergame.geometry.LineSegment;
 import lasergame.levelentities.*;
-import lasergame.vectormath.Vector2;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -29,8 +28,6 @@ public class Levelx implements ILevel
 
 	private ArrayList<ILevelEntity> mEntitiesToAdd = new ArrayList<ILevelEntity>();
 	private ArrayList<ILevelEntity> mEntitiesToRemove = new ArrayList<ILevelEntity>();
-	private boolean mHasWon = false;
-	
 	@Override
 	public void render(GameContainer gc, Graphics g) 
 	{
@@ -102,7 +99,6 @@ public class Levelx implements ILevel
 	@Override
 	public void win() 
 	{
-		mHasWon = true;
 	}
 
 	@Override

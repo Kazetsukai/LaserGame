@@ -18,6 +18,7 @@ public class LaserBeam implements IPhysicsEntity {
 	Vector2[] _tail;
 	Vector2 _velocity;
 	Vector2 _accum;
+	LineSegment _beam;
 	
 	boolean _dying = false;
 	double _velocityAtDeath = 0;
@@ -60,24 +61,24 @@ public class LaserBeam implements IPhysicsEntity {
 
 	@Override
 	public void update(GameContainer gc, double timeElapsed) {
-		
-		_location = _location.add(_velocity.multiply((timeElapsed)));
-		
+		Vector2 timestepVelocity = _velocity.multiply((timeElapsed));
+		_location = _location.add(timestepVelocity);
 		if (!_dying) {
-			
-			
 			boolean done = false;
 			int bounces = 0;
 			
 			while (!done) {
-				LineSegment laser = LineSegment.fromPoints(_location, _location.add(_velocity));
-				List<Intersection> intersections = _level.getIntersectionsWith(laser);
+				//LineSegment laser = LineSegment.fromPoints(_location, _location.add(_velocity));
+				//List<Intersection> intersections = _level.getIntersectionsWith(laser);
+				timestepVelocity = _velocity.multiply((timeElapsed));
+				_beam = LineSegment.fromPoints(_location, _location.add(timestepVelocity));
+				List<Intersection> intersections = _level.getIntersectionsWith(_beam);
 		
 				if(intersections.size() > 0) {
 					Intersection.sortIntersections(intersections);
 					Intersection intersection = intersections.get(0);
 					
-					if (intersection.entity instanceof IStrikable)
+					if(intersection.entity instanceof IStrikable)
 						((IStrikable)intersection.entity).strike(this);
 					
 					LineSegment line = new LineSegment(intersection.point, intersection.tangent);
@@ -133,6 +134,10 @@ public class LaserBeam implements IPhysicsEntity {
 			_accum = _accum.add(impulse);
 			_velocity = _velocity.add(impulse);
 		}
+	}
+	
+	public LineSegment getBeam(){
+		return _beam;
 	}
 
 	@Override

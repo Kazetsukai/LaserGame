@@ -22,7 +22,8 @@ public class LukesLevel implements ILevel {
 			(ILevelEntity)new BrickWall(new LineSegment(new Vector2(820, 300), new Vector2(-70, 300)), 30),
 			(ILevelEntity)new BrickWall(new LineSegment(new Vector2(50, 430), new Vector2(-40, 0)), 10),
 			(ILevelEntity)new BrickWall(new LineSegment(new Vector2(30, 450), new Vector2(0, -40)), 10),
-			//(ILevelEntity)new GravityWell(400,400,40,300, this),
+			(ILevelEntity)new BeamSplitter(new LineSegment(new Vector2(100,100), new Vector2(20,-10)), this),
+			(ILevelEntity)new GravityWell(400,400,40,300, this),
 			(ILevelEntity)new LaserEmitter(100,500, this),
 			(ILevelEntity)new Target(600, 500, 30, 40, this)
 			));
@@ -98,7 +99,7 @@ public class LukesLevel implements ILevel {
 
 	@Override
 	public ILevel getNextLevel() {
-		return new Level1();
+		return new Levelx();
 	}
 
 	@Override

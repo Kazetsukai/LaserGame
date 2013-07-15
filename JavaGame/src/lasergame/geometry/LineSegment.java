@@ -97,4 +97,8 @@ public class LineSegment {
 	public Vector2 nearestPointTo(Vector2 rhs) {
 		return rhs.subtract(mStartPoint).projectOnto(mDisplacement).add(mStartPoint);
 	}
+	
+	public Vector2 center() {
+		return this.scale(0.5).getEndPoint();
+	}
 }
