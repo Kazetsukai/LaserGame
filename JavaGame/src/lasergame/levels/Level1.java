@@ -17,12 +17,14 @@ import org.newdawn.slick.*;
 public class Level1 implements ILevel {
 	private List<ILevelEntity> mLevelEntities = new ArrayList<ILevelEntity>(Arrays.asList(
 			(ILevelEntity)new Wall(new LineSegment(new Vector2(400, 300), new Vector2(0, 400)), 20),
-			(ILevelEntity)new Wall(new LineSegment(new Vector2(200, 10), new Vector2(400, 0)), 20),
+			(ILevelEntity)new BreakableWall(this, new LineSegment(new Vector2(200, 20), new Vector2(400, 0)), 10, 3),
+			(ILevelEntity)new BreakableWall(this, new LineSegment(new Vector2(600, 20), new Vector2(0, 90)), 10, 2),
+			(ILevelEntity)new BreakableWall(this, new LineSegment(new Vector2(600, 110), new Vector2(-100, 0)), 10, 2),
 			(ILevelEntity)new Wall(new LineSegment(new Vector2(100, 10), new Vector2(-70, 40)), 10),
 			(ILevelEntity)new Wall(new LineSegment(new Vector2(820, 300), new Vector2(-70, 300)), 30),
 			(ILevelEntity)new Wall(new LineSegment(new Vector2(50, 430), new Vector2(-40, 0)), 10),
 			(ILevelEntity)new Wall(new LineSegment(new Vector2(30, 450), new Vector2(0, -40)), 10),
-			(ILevelEntity)new LaserEmitter(100,500, this)));
+			(ILevelEntity)new LaserEmitter(100, 500, this)));
 	
 
 	private ArrayList<ILevelEntity> mEntitiesToAdd = new ArrayList<ILevelEntity>();
