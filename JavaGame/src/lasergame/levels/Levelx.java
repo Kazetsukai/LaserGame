@@ -104,7 +104,7 @@ public class Levelx implements ILevel
 	@Override
 	public ILevel getNextLevel() 
 	{
-		return new LukesLevel();
+		return new Level1();
 	}
 
 	@Override
