@@ -24,8 +24,8 @@ public class ShootLasersScript : MonoBehaviour {
         // Get point on plane at mouse
         var pointOnPlane = ray.GetPoint(dist);
         Vector3 pos = laserShooter.transform.position;
-
-        FireMahLazar(pos, pointOnPlane - pos);
+		
+    	FireMahLazar(pos, pointOnPlane - pos);
 	}
 
     void FireMahLazar(Vector3 pos, Vector3 dir)
@@ -33,10 +33,7 @@ public class ShootLasersScript : MonoBehaviour {
         RaycastHit rayCastInfo;
         Ray laserRay = new Ray(pos, dir);
 
-
         bool hitSomething = Physics.Raycast(laserRay, out rayCastInfo);
-		
-		
 		
         if (hitSomething)
         {
