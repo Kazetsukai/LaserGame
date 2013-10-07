@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class MouseSelectPiece : MonoBehaviour {
+
+    public Transform Turret;
+    public Transform Turret2;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +26,16 @@ public class MouseSelectPiece : MonoBehaviour {
 				
 				if (Input.GetMouseButtonDown(0))
 				{
-					rayHit.collider.gameObject.BroadcastMessage("GoAway");
+                    rayHit.collider.gameObject.BroadcastMessage("SetTileObject",Turret.gameObject);
 				}
+                else if (Input.GetMouseButtonDown(1))
+                {
+                    rayHit.collider.gameObject.BroadcastMessage("SetTileObject", Turret2.gameObject);
+                }
+                else if (Input.GetMouseButtonDown(2))
+                {
+                    rayHit.collider.gameObject.BroadcastMessage("ClearTileObject");
+                }
 			}
 		}
 		
