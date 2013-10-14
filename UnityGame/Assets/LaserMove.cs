@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GridCreate : MonoBehaviour {
+public class LaserMove : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -10,6 +10,6 @@ public class GridCreate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        transform.position = transform.position + new Vector3(Time.deltaTime, 0, 0);
 	}
 }

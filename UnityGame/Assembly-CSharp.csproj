@@ -46,12 +46,12 @@
   <ItemGroup>
      <Compile Include="Assets\Colourify.cs" />
      <Compile Include="Assets\CreateGrid.cs" />
-     <Compile Include="Assets\GridCreate.cs" />
-     <Compile Include="Assets\Gridify.cs" />
+     <Compile Include="Assets\GridNeighbours.cs" />
+     <Compile Include="Assets\LaserMove.cs" />
      <Compile Include="Assets\MouseSelectPiece.cs" />
      <Compile Include="Assets\Movify.cs" />
-     <Compile Include="Assets\ShootLasersScript.cs" />
      <Compile Include="Assets\TileDocking.cs" />
+     <Compile Include="Assets\TurretShooter.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
   </ItemGroup>
   <ItemGroup>
