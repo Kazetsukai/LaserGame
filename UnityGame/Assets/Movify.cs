@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Movify : MonoBehaviour {
-
+	
 	// Use this for initialization
 	void Start () {
 	

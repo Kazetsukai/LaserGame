@@ -20,23 +20,20 @@ public class MouseSelectPiece : MonoBehaviour {
 		
 		if (Physics.Raycast(ray, out rayHit))
 		{
-			if (rayHit.collider.gameObject.name == "Cube(Clone)")
+			var tileDocking = rayHit.collider.gameObject.GetComponent<GridSquare>();
+			
+			if (Input.GetMouseButtonDown(0))
 			{
-				rayHit.collider.gameObject.renderer.material.SetColor("_Color", Color.red);
-				
-				if (Input.GetMouseButtonDown(0))
-				{
-                    rayHit.collider.gameObject.BroadcastMessage("SetTileObject",Turret.gameObject);
-				}
-                else if (Input.GetMouseButtonDown(1))
-                {
-                    rayHit.collider.gameObject.BroadcastMessage("SetTileObject", Turret2.gameObject);
-                }
-                else if (Input.GetMouseButtonDown(2))
-                {
-                    rayHit.collider.gameObject.BroadcastMessage("ClearTileObject");
-                }
+                tileDocking.SetTileObject(Turret.gameObject);
 			}
+            else if (Input.GetMouseButtonDown(1))
+            {
+                tileDocking.SetTileObject(Turret2.gameObject);
+            }
+            else if (Input.GetMouseButtonDown(2))
+            {
+                tileDocking.ClearTileObject();
+            }
 		}
 		
 		

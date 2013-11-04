@@ -1,33 +1,3 @@
-#################
-## Eclipse
-#################
-
-*.pydevproject
-.project
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
-
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# CDT-specific
-.cproject
-
-# PDT-specific
-.buildpath
-
 
 #################
 ## Visual Studio
@@ -47,7 +17,6 @@ local.properties
 *_i.c
 *_p.c
 *.ilk
-*.meta
 *.obj
 *.pch
 *.pdb
@@ -161,3 +130,9 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+# Unity
+Library/
+obj/
+ScriptAssemblies/
+Assembly-*

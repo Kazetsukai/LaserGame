@@ -23,7 +23,12 @@ public class TurretShooter : MonoBehaviour {
             time--;
 
             var laser = Instantiate(LaserObject) as GameObject;
-            laser.transform.position = this.transform.position + new Vector3(0, 0.5f, 0);
+			
+			var script = laser.GetComponent<LaserMove>();
+			var square = this.GetComponent<GridObject>().ParentSquare;
+			script.From = square.transform.position + new Vector3(0, 0.5f, 0);
+			script.To = square.East.transform.position + new Vector3(0, 0.5f, 0);
+			
         }
 	}
 }
