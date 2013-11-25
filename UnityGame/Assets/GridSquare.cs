@@ -51,4 +51,43 @@ public class GridSquare : MonoBehaviour {
 	void Update () {
 	
 	}
+	
+	public void Notify(LaserMove laser)
+	{
+		GridSquare nextSquare = North;
+		
+		if (TileObject != null)
+		{
+			var script = TileObject.GetScript<IGridObject>();
+			if (script != null)
+				script.Strike(laser);
+		}
+		
+		laser.From = this.transform.position + new Vector3(0, 0.5f, 0);
+		laser.Progress %= 1.0f;
+		
+		switch (laser.Direction)
+		{
+		case GridDirection.North:
+			nextSquare = North;
+			break;
+		case GridDirection.East:
+			nextSquare = East;
+			break;
+		case GridDirection.South:
+			nextSquare = South;
+			break;
+		case GridDirection.West:
+			nextSquare = West;
+			break;
+		}
+		
+		if (nextSquare == null) 
+			Destroy(laser.gameObject);
+		else
+		{
+			laser.To = nextSquare.transform.position + new Vector3(0, 0.5f, 0);
+			laser.TerminalSquare = nextSquare;
+		}
+	}
 }

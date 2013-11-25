@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GridObject : MonoBehaviour {
-	
-	public GridSquare ParentSquare;
-	
+public class Mirror : MonoBehaviour, IGridObject {
+
 	// Use this for initialization
 	void Start () {
 	
@@ -17,6 +15,6 @@ public class GridObject : MonoBehaviour {
 	
 	public void Strike(LaserMove laser)
 	{
-		gameObject.BroadcastMessage("Interact", laser, SendMessageOptions.DontRequireReceiver);
+		laser.Direction = (GridDirection)Random.Range(0, 4);
 	}
 }

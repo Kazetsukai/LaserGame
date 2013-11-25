@@ -29,8 +29,8 @@ public class CreateGrid : MonoBehaviour {
 			{
 				if (x > 0) grid[x,y].West = grid[x-1,y];
 				if (x < width-1) grid[x,y].East = grid[x+1,y];
-				if (y > 0) grid[x,y].West = grid[x,y-1];
-				if (y < height-1) grid[x,y].East = grid[x,y+1];
+				if (y > 0) grid[x,y].South = grid[x,y-1];
+				if (y < height-1) grid[x,y].North = grid[x,y+1];
 			}
 		}
 	}

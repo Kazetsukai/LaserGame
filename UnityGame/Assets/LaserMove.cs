@@ -5,21 +5,28 @@ public class LaserMove : MonoBehaviour {
 	
 	public Vector3 From;
 	public Vector3 To;
+	public GridSquare TerminalSquare;
+	public GridDirection Direction;
 	
 	public float Progress = 0;
 	public float Speed = 1;
 	
 	// Use this for initialization
-	void Start () {
-	
+	void Start ()
+	{
+		transform.position = From;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		Progress += Time.deltaTime * Speed;
 		if (Progress > 1)
+		{
 			Progress = 1;
+			TerminalSquare.Notify(this);
+		}
 		
-        transform.position = (1-Progress) * From + (Progress) * To;
+        transform.position = (1 - Progress) * From + (Progress) * To;
 	}
 }
