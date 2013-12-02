@@ -12,7 +12,7 @@ GameObject:
   - 135: {fileID: 13500000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c4360d282c2cce542bf38b6328e183b4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

@@ -21,19 +21,21 @@ public class MouseSelectPiece : MonoBehaviour {
 		if (Physics.Raycast(ray, out rayHit))
 		{
 			var tileDocking = rayHit.collider.gameObject.GetComponent<GridSquare>();
-			
-			if (Input.GetMouseButtonDown(0))
+			if(tileDocking!=null)
 			{
-                tileDocking.SetTileObject(Turret.gameObject);
+				if (Input.GetMouseButtonDown(0))
+				{
+	                tileDocking.SetTileObject(Turret.gameObject);
+				}
+	            else if (Input.GetMouseButtonDown(1))
+	            {
+	                tileDocking.SetTileObject(Turret2.gameObject);
+	            }
+	            else if (Input.GetMouseButtonDown(2))
+	            {
+	                tileDocking.ClearTileObject();
+	            }
 			}
-            else if (Input.GetMouseButtonDown(1))
-            {
-                tileDocking.SetTileObject(Turret2.gameObject);
-            }
-            else if (Input.GetMouseButtonDown(2))
-            {
-                tileDocking.ClearTileObject();
-            }
 		}
 		
 		

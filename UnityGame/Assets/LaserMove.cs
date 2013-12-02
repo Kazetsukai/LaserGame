@@ -17,16 +17,18 @@ public class LaserMove : MonoBehaviour {
 		transform.position = From;
 	}
 	
+	void Update(){}//nothing
+	
 	// Update is called once per frame
-	void Update () 
+	public void Update(float deltaTime) 
 	{
-		Progress += Time.deltaTime * Speed;
+		Progress += deltaTime * Speed;
 		if (Progress > 1)
 		{
 			Progress = 1;
 			TerminalSquare.Notify(this);
 		}
 		
-        transform.position = (1 - Progress) * From + (Progress) * To;
+        transform.position = (1 - Progress) * From + Progress * To;
 	}
 }

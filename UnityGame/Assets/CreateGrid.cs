@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class CreateGrid : MonoBehaviour {
-	
 	public GameObject piece;
 	
 	// Use this for initialization
@@ -37,6 +36,9 @@ public class CreateGrid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		var deltaTime = Time.deltaTime;
+		foreach(LaserMove laser in GameObject.FindObjectsOfType(typeof(LaserMove)) ){
+			laser.Update(deltaTime);
+		}
 	}
 }

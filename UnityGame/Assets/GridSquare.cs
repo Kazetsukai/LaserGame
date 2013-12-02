@@ -12,6 +12,18 @@ public class GridSquare : MonoBehaviour {
 	
     public void SetTileObject(GameObject obj)
     {
+		// If we are setting a mirror on a mirror...
+		// Just Phillip Rayner it!
+		if (TileObject != null)
+		{
+			var oldMirror = TileObject.GetComponent<Mirror>();
+			var newMirror = obj.GetComponent<Mirror>();
+			if(oldMirror != null && newMirror != null){
+				oldMirror.Flip();
+				return;
+			}
+		}
+		
         ClearTileObject();
         var pos = this.transform.position;
         pos.y += 0.1f;
@@ -19,13 +31,6 @@ public class GridSquare : MonoBehaviour {
         TileObject = (GameObject) Instantiate(obj, pos, Quaternion.AngleAxis(90f, Vector3.left));
 		
 		TileObject.GetComponent<GridObject>().ParentSquare = this;
-		
-		// Hack
-		if (TileObject.name == "Mirror(Clone)")
-		{
-			TileObject.transform.rotation = Quaternion.AngleAxis(45f, Vector3.up);
-			TileObject.transform.position += new Vector3(0, 0.4f, 0);
-		}
     }
 
     public void ClearTileObject()
