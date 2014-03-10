@@ -3,21 +3,24 @@ using System.Collections;
 
 public class CreateGrid : MonoBehaviour {
 	public GameObject piece;
+	public GameObject Target;
 	
 	// Use this for initialization
 	void Start () {
 		
-		GridSquare[,] grid = new GridSquare[6,6];
+		GridSquare[,] grid = new GridSquare[10,10];
 		
 		for (int x = 0; x < grid.GetLength(0); x++)
 		{
 			for (int y = 0; y < grid.GetLength(1); y++)
 			{
-				var gameObject = Instantiate(piece, new Vector3(x * 1.5f - 3.8f, 0.1f, y * 1.5f - 3.8f), Quaternion.identity) as GameObject;
+				var gameObject = Instantiate(piece, new Vector3(x * 1.5f - grid.GetLength(0) * 0.7f, 0.1f, y * 1.5f - grid.GetLength(0) * 0.7f), Quaternion.identity) as GameObject;
 				var gridSquare = gameObject.GetComponent<GridSquare>();
 				grid[x,y] = gridSquare;
 			}
 		}
+		
+		grid[7,7].SetTileObject(Target);
 		
 		int width = grid.GetLength(0);
 		int height = grid.GetLength(1);
