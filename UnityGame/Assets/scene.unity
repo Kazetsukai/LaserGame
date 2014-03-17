@@ -180,7 +180,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 625284068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .450891972, y: -1.14414525, z: -1.63598418}
+  m_LocalPosition: {x: .450891972, y: 0, z: -1.63598418}
   m_LocalScale: {x: 20, y: .200000003, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   piece: {fileID: 100000, guid: 419d8dc6846883544a9778a5d692eb2c, type: 2}
   Target: {fileID: 100000, guid: 52472fa3fbadffc48a7017415a9b7a68, type: 2}
+  Wall: {fileID: 100000, guid: 2f5578fe0c329404781cec0c81d171d1, type: 2}
 --- !u!1 &650255140
 GameObject:
   m_ObjectHideFlags: 0

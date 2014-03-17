@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class GridSquare : MonoBehaviour {
 
@@ -30,7 +31,9 @@ public class GridSquare : MonoBehaviour {
 
         TileObject = (GameObject) Instantiate(obj, pos, Quaternion.AngleAxis(90f, Vector3.left));
 		
-		TileObject.GetComponent<GridObject>().ParentSquare = this;
+		var gridObject = TileObject.GetComponents<MonoBehaviour>().FirstOrDefault(x => x is IGridObject) as IGridObject;
+
+		gridObject.ParentSquare = this;
     }
 
     public void ClearTileObject()
@@ -38,7 +41,8 @@ public class GridSquare : MonoBehaviour {
         Debug.Log("ClearTileObject");
         if (TileObject != null)
         {
-			var gridObject = TileObject.GetComponent<GridObject>();
+			var gridObject = TileObject.GetComponents<MonoBehaviour>().FirstOrDefault(x => x is IGridObject) as IGridObject;
+					
 			if (gridObject != null) gridObject.ParentSquare = null;
             Destroy(TileObject);
         }

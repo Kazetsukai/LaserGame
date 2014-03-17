@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
-public class TurretShooter : MonoBehaviour {
+public class TurretShooter : MonoBehaviour, IGridObject {
 
     float time = 0;
 
     public Object LaserObject;
-
+    
+	public GridSquare ParentSquare {get; set;}
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -25,11 +28,19 @@ public class TurretShooter : MonoBehaviour {
             var laser = Instantiate(LaserObject) as GameObject;
 			
 			var script = laser.GetComponent<LaserMove>();
-			var square = this.GetComponent<GridObject>().ParentSquare;
+			
+			var gridObject = this.GetComponents<MonoBehaviour>().FirstOrDefault(x => x is IGridObject) as IGridObject;
+			
+			var square = gridObject.ParentSquare;
 			script.From = square.transform.position + new Vector3(0, 0.5f, 0);
 			script.To = square.East.transform.position + new Vector3(0, 0.5f, 0);
 			script.TerminalSquare = square.East;
 			script.Direction = GridDirection.East;
         }
+	}
+	
+	public void Strike (LaserMove laser)
+	{
+		
 	}
 }

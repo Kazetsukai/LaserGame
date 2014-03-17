@@ -50,7 +50,6 @@
      <Compile Include="Assets\Colourify.cs" />
      <Compile Include="Assets\CreateGrid.cs" />
      <Compile Include="Assets\GridDirection.cs" />
-     <Compile Include="Assets\GridObject.cs" />
      <Compile Include="Assets\GridSquare.cs" />
      <Compile Include="Assets\IBounceable.cs" />
      <Compile Include="Assets\IGridObject.cs" />
@@ -60,6 +59,7 @@
      <Compile Include="Assets\MouseSelectPiece.cs" />
      <Compile Include="Assets\Movify.cs" />
      <Compile Include="Assets\TurretShooter.cs" />
+     <Compile Include="Assets\WallBehaviour.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

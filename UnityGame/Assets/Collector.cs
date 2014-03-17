@@ -6,6 +6,8 @@ public class Collector : MonoBehaviour, IGridObject
  	public int Omnomnom;
  
 	#region IGridObject implementation
+	
+	public GridSquare ParentSquare {get; set;}
 
 	public void Strike (LaserMove laser)
 	{

@@ -4,6 +4,7 @@ using System.Collections;
 public class CreateGrid : MonoBehaviour {
 	public GameObject piece;
 	public GameObject Target;
+	public GameObject Wall;
 	
 	// Use this for initialization
 	void Start () {
@@ -15,8 +16,13 @@ public class CreateGrid : MonoBehaviour {
 			for (int y = 0; y < grid.GetLength(1); y++)
 			{
 				var gameObject = Instantiate(piece, new Vector3(x * 1.5f - grid.GetLength(0) * 0.7f, 0.1f, y * 1.5f - grid.GetLength(0) * 0.7f), Quaternion.identity) as GameObject;
+				
 				var gridSquare = gameObject.GetComponent<GridSquare>();
+				
 				grid[x,y] = gridSquare;
+				
+				if (Random.value > 0.8f)
+					gridSquare.SetTileObject(Wall);
 			}
 		}
 		

@@ -6,6 +6,8 @@ public class Mirror : MonoBehaviour, IGridObject {
 	
 	private MirrorOrientation _orientation = MirrorOrientation.BackSlash;
 	
+	public GridSquare ParentSquare {get; set;}
+	
 	// Use this for initialization
 	void Start () {
 		transform.position += new Vector3(0, 0.4f, 0);
