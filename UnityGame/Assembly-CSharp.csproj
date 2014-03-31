@@ -56,8 +56,9 @@
      <Compile Include="Assets\InterfaceUtility.cs" />
      <Compile Include="Assets\LaserMove.cs" />
      <Compile Include="Assets\Mirror.cs" />
-     <Compile Include="Assets\MouseSelectPiece.cs" />
      <Compile Include="Assets\Movify.cs" />
+     <Compile Include="Assets\SelectPiece.cs" />
+     <Compile Include="Assets\SplitterBehavior.cs" />
      <Compile Include="Assets\TurretShooter.cs" />
      <Compile Include="Assets\WallBehaviour.cs" />
   </ItemGroup>

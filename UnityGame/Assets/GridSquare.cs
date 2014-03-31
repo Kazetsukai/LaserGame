@@ -29,7 +29,7 @@ public class GridSquare : MonoBehaviour {
         var pos = this.transform.position;
         pos.y += 0.1f;
 
-        TileObject = (GameObject) Instantiate(obj, pos, Quaternion.AngleAxis(90f, Vector3.left));
+        TileObject = (GameObject) Instantiate(obj, pos, Quaternion.identity);//.AngleAxis(90f, Vector3.left));
 		
 		var gridObject = TileObject.GetComponents<MonoBehaviour>().FirstOrDefault(x => x is IGridObject) as IGridObject;
 
@@ -63,40 +63,13 @@ public class GridSquare : MonoBehaviour {
 	
 	public void Notify(LaserMove laser)
 	{
-		GridSquare nextSquare = North;
-		
 		if (TileObject != null)
 		{
 			var script = TileObject.GetScript<IGridObject>();
 			if (script != null)
 				script.Strike(laser);
 		}
-		
-		laser.From = this.transform.position + new Vector3(0, 0.5f, 0);
-		laser.Progress %= 1.0f;
-		
-		switch (laser.Direction)
-		{
-		case GridDirection.North:
-			nextSquare = North;
-			break;
-		case GridDirection.East:
-			nextSquare = East;
-			break;
-		case GridDirection.South:
-			nextSquare = South;
-			break;
-		case GridDirection.West:
-			nextSquare = West;
-			break;
-		}
-		
-		if (nextSquare == null) 
-			Destroy(laser.gameObject);
-		else
-		{
-			laser.To = nextSquare.transform.position + new Vector3(0, 0.5f, 0);
-			laser.TerminalSquare = nextSquare;
-		}
+
+        laser.Move();
 	}
 }

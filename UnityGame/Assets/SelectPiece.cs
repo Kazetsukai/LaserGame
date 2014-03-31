@@ -2,10 +2,11 @@
 using System.Collections;
 using System;
 
-public class MouseSelectPiece : MonoBehaviour {
+public class SelectPiece : MonoBehaviour {
 
     public Transform Turret;
-    public Transform Turret2;
+    public Transform Mirror;
+    public Transform Splitter;
 
 	// Use this for initialization
 	void Start () {
@@ -23,18 +24,22 @@ public class MouseSelectPiece : MonoBehaviour {
 			var tileDocking = rayHit.collider.gameObject.GetComponent<GridSquare>();
 			if(tileDocking!=null)
 			{
-				if (Input.GetMouseButtonDown(0))
+				if (Input.GetKeyDown(KeyCode.T))
 				{
 	                tileDocking.SetTileObject(Turret.gameObject);
 				}
-	            else if (Input.GetMouseButtonDown(1))
+	            else if (Input.GetMouseButtonDown(0))
 	            {
-	                tileDocking.SetTileObject(Turret2.gameObject);
+	                tileDocking.SetTileObject(Mirror.gameObject);
 	            }
-	            else if (Input.GetMouseButtonDown(2))
+                else if (Input.GetKeyDown(KeyCode.Delete))
 	            {
 	                tileDocking.ClearTileObject();
 	            }
+                else if (Input.GetKeyDown(KeyCode.S))
+                {
+                    tileDocking.SetTileObject(Splitter.gameObject);
+                }
 			}
 		}
 		
