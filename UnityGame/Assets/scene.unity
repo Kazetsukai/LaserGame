@@ -83,6 +83,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 53669631}
   - 114: {fileID: 53669632}
+  - 114: {fileID: 53669633}
   m_Layer: 0
   m_Name: ScriptController
   m_TagString: Untagged
@@ -115,6 +116,17 @@ MonoBehaviour:
   Turret: {fileID: 400000, guid: bc9d69ba40c297a498f486fea246f1a9, type: 2}
   Mirror: {fileID: 400000, guid: 294ebc11fc5951d42b7bdf4b7ffe9339, type: 2}
   Splitter: {fileID: 400000, guid: e5ef60f4d82302c48a4bea60fd4a5938, type: 2}
+--- !u!114 &53669633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 53669630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa26fb69b46fb9468a0011ee3e53cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &625284068
 GameObject:
   m_ObjectHideFlags: 0

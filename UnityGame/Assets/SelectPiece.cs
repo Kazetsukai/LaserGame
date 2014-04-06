@@ -24,21 +24,24 @@ public class SelectPiece : MonoBehaviour {
 			var tileDocking = rayHit.collider.gameObject.GetComponent<GridSquare>();
 			if(tileDocking!=null)
 			{
-				if (Input.GetKeyDown(KeyCode.T))
-				{
-	                tileDocking.SetTileObject(Turret.gameObject);
-				}
-	            else if (Input.GetMouseButtonDown(0))
-	            {
-	                tileDocking.SetTileObject(Mirror.gameObject);
-	            }
-                else if (Input.GetKeyDown(KeyCode.Delete))
-	            {
-	                tileDocking.ClearTileObject();
-	            }
-                else if (Input.GetKeyDown(KeyCode.S))
+                if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
                 {
-                    tileDocking.SetTileObject(Splitter.gameObject);
+                    if (Input.GetKeyDown(KeyCode.T))
+                    {
+                        tileDocking.SetTileObject(Turret.gameObject);
+                    }
+                    else if (Input.GetMouseButtonDown(0))
+                    {
+                        tileDocking.SetTileObject(Mirror.gameObject);
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Delete))
+                    {
+                        tileDocking.ClearTileObject();
+                    }
+                    else if (Input.GetKeyDown(KeyCode.S))
+                    {
+                        tileDocking.SetTileObject(Splitter.gameObject);
+                    }
                 }
 			}
 		}

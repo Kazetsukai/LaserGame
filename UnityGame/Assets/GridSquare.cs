@@ -10,6 +10,9 @@ public class GridSquare : MonoBehaviour {
     public GridSquare South;
     public GridSquare East;
     public GridSquare West;
+
+    public int X;
+    public int Y;
 	
     public void SetTileObject(GameObject obj)
     {

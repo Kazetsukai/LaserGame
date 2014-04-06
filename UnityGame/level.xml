@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Objects>
+    <LevelObject X="6" Y="4">
+      <Name>Turret</Name>
+    </LevelObject>
+    <LevelObject X="5" Y="6">
+      <Name>Splitter</Name>
+    </LevelObject>
+    <LevelObject X="8" Y="4">
+      <Name>Splitter</Name>
+    </LevelObject>
+    <LevelObject X="8" Y="5">
+      <Name>Splitter</Name>
+    </LevelObject>
+    <LevelObject X="5" Y="5">
+      <Name>Splitter</Name>
+    </LevelObject>
+    <LevelObject X="3" Y="5">
+      <Name>Mirror</Name>
+    </LevelObject>
+    <LevelObject X="3" Y="2">
+      <Name>Mirror</Name>
+    </LevelObject>
+    <LevelObject X="0" Y="2">
+      <Name>Turret</Name>
+    </LevelObject>
+    <LevelObject X="7" Y="7">
+      <Name>Collector</Name>
+    </LevelObject>
+    <LevelObject X="8" Y="9">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="8" Y="2">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="7" Y="6">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="7" Y="2">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="7" Y="1">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="6" Y="6">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="6" Y="3">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="5" Y="8">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="5" Y="7">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="4" Y="8">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="4" Y="3">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="4" Y="2">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="3" Y="8">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="3" Y="7">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="2" Y="1">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="1" Y="8">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="1" Y="4">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="1" Y="1">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="1" Y="0">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="0" Y="5">
+      <Name>Wall</Name>
+    </LevelObject>
+    <LevelObject X="0" Y="4">
+      <Name>Wall</Name>
+    </LevelObject>
+  </Objects>
+</Level>
