@@ -46,24 +46,25 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Collector.cs" />
-     <Compile Include="Assets\Colourify.cs" />
-     <Compile Include="Assets\CreateGrid.cs" />
-     <Compile Include="Assets\GridDirection.cs" />
-     <Compile Include="Assets\GridSquare.cs" />
-     <Compile Include="Assets\IBounceable.cs" />
-     <Compile Include="Assets\IGridObject.cs" />
-     <Compile Include="Assets\InterfaceUtility.cs" />
-     <Compile Include="Assets\LaserMove.cs" />
-     <Compile Include="Assets\LevelLoadSave.cs" />
      <Compile Include="Assets\LevelModel\Level.cs" />
      <Compile Include="Assets\LevelModel\LevelObject.cs" />
-     <Compile Include="Assets\Mirror.cs" />
-     <Compile Include="Assets\Movify.cs" />
-     <Compile Include="Assets\SelectPiece.cs" />
-     <Compile Include="Assets\SplitterBehavior.cs" />
-     <Compile Include="Assets\TurretShooter.cs" />
-     <Compile Include="Assets\WallBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Collector.cs" />
+     <Compile Include="Assets\Scripts\Colourify.cs" />
+     <Compile Include="Assets\Scripts\CreateGrid.cs" />
+     <Compile Include="Assets\Scripts\GridDirection.cs" />
+     <Compile Include="Assets\Scripts\GridSquare.cs" />
+     <Compile Include="Assets\Scripts\IBounceable.cs" />
+     <Compile Include="Assets\Scripts\IGridObject.cs" />
+     <Compile Include="Assets\Scripts\InterfaceUtility.cs" />
+     <Compile Include="Assets\Scripts\LaserCombiner.cs" />
+     <Compile Include="Assets\Scripts\LaserMove.cs" />
+     <Compile Include="Assets\Scripts\LevelLoadSave.cs" />
+     <Compile Include="Assets\Scripts\Mirror.cs" />
+     <Compile Include="Assets\Scripts\Movify.cs" />
+     <Compile Include="Assets\Scripts\SelectPiece.cs" />
+     <Compile Include="Assets\Scripts\SplitterBehavior.cs" />
+     <Compile Include="Assets\Scripts\TurretShooter.cs" />
+     <Compile Include="Assets\Scripts\WallBehaviour.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

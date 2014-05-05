@@ -32,19 +32,18 @@ public class GridSquare : MonoBehaviour {
         var pos = this.transform.position;
         pos.y += 0.1f;
 
-        TileObject = (GameObject) Instantiate(obj, pos, Quaternion.identity);//.AngleAxis(90f, Vector3.left));
+        TileObject = (GameObject) Instantiate(obj, pos, Quaternion.identity);
 		
-		var gridObject = TileObject.GetComponents<MonoBehaviour>().FirstOrDefault(x => x is IGridObject) as IGridObject;
+		var gridObject = TileObject.GetComponents<MonoBehaviour>().Single(x => x is IGridObject) as IGridObject;
 
 		gridObject.ParentSquare = this;
     }
 
     public void ClearTileObject()
     {
-        Debug.Log("ClearTileObject");
         if (TileObject != null)
         {
-			var gridObject = TileObject.GetComponents<MonoBehaviour>().FirstOrDefault(x => x is IGridObject) as IGridObject;
+            var gridObject = TileObject.GetComponents<MonoBehaviour>().Single(x => x is IGridObject) as IGridObject;
 					
 			if (gridObject != null) gridObject.ParentSquare = null;
             Destroy(TileObject);

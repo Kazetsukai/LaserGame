@@ -3,7 +3,7 @@ guid: 3a6707d0542f77f4cae7e078d9bf5b39
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - Turret: {fileID: 400000, guid: bc9d69ba40c297a498f486fea246f1a9, type: 2}
+  - Turret: {fileID: 400000, guid: 71824e55fb169104584ad81cc154386e, type: 2}
   - Mirror: {fileID: 400000, guid: 294ebc11fc5951d42b7bdf4b7ffe9339, type: 2}
   - Splitter: {fileID: 400000, guid: e5ef60f4d82302c48a4bea60fd4a5938, type: 2}
   executionOrder: 0

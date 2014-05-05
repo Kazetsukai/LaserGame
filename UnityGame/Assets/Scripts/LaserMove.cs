@@ -15,7 +15,6 @@ public class LaserMove : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        renderer.light.color = Colour;
         renderer.material.color = Colour;
 
 		transform.position = From;
@@ -26,7 +25,6 @@ public class LaserMove : MonoBehaviour {
 	// Update is called once per frame
 	public void Update(float deltaTime)
     {
-        renderer.light.color = Colour;
         renderer.material.color = Colour;
 
         Progress += deltaTime * Speed;

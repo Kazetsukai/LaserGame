@@ -23,21 +23,18 @@ public class SplitterBehavior : MonoBehaviour, IGridObject
         Destroy(laser.gameObject);
 
         LaserMove l1 = ((GameObject)Instantiate(laser.gameObject)).GetComponent<LaserMove>();
-        l1.light.enabled = true;
         l1.Direction = laser.Direction.RotateLeft();
         l1.Colour = new Color(laser.Colour.r, 0, 0);
         l1.Move();
 
 
         LaserMove l2 = ((GameObject)Instantiate(laser.gameObject)).GetComponent<LaserMove>();
-        l2.light.enabled = true;
         l2.Direction = laser.Direction;
         l2.Colour = new Color(0, laser.Colour.g, 0);
         l2.Move();
 
 
         LaserMove l3 = ((GameObject)Instantiate(laser.gameObject)).GetComponent<LaserMove>();
-        l3.light.enabled = true;
         l3.Direction = laser.Direction.RotateRight();
         l3.Colour = new Color(0, 0, laser.Colour.b);
         l3.Move();
