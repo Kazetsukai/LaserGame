@@ -3,6 +3,6 @@ LaserGame
 A group project we were mucking around with for an hour or so each week. 
 We went through various prototypes (JS -> Java -> Unity3D).
 
-The idea was to make a puzzle game based on lasers and mirrors. We played around with both continuous lasers, and very discrete lasers (not acting like light in real life).
+The idea was to make a puzzle game based on lasers and mirrors. We played around with both continuous lasers, and very discrete lasers (not acting like light in real life). We eventually drifted away from the project, and it has been long enough that we consider it abandoned.
 
 Have a look at how it evolved over time, and feel free to do what you like with the code.
